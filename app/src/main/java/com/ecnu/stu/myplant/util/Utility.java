@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.ecnu.stu.myplant.db.City;
 import com.ecnu.stu.myplant.db.County;
 import com.ecnu.stu.myplant.db.Province;
+import com.ecnu.stu.myplant.gson.Weather;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,5 +98,20 @@ public class Utility {
         return false;
     }
 
-
+    /**
+     *将JSON数据解析成Weather类
+     * @param respone
+     * @return
+     */
+    public static Weather handleWeatherResponse(String respone) {
+        try {
+            JSONObject jsonObject = new JSONObject(respone);
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            String weatherContent = jsonArray.getJSONArray(0).toString();
+            return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -17,5 +17,5 @@ public class Weather {
 
     public Suggestion suggestion;
 
-    
+
 }
