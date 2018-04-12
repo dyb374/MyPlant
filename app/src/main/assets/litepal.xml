@@ -1,0 +1,12 @@
+<litepal>
+
+    <dbname value = "my_plant" />
+
+    <version value = "1" />
+
+    <list>
+        <mapping class = "com.ecnu.stu.myplant.db.Province" />
+        <mapping class = "com.ecnu.stu.myplant.db.City" />
+        <mapping class = "com.ecnu.stu.myplant.db.County" />
+    </list>
+</litepal>
