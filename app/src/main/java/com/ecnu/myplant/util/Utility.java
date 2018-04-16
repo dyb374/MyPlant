@@ -1,11 +1,11 @@
-package com.ecnu.stu.myplant.util;
+package com.ecnu.myplant.util;
 
 import android.text.TextUtils;
 
-import com.ecnu.stu.myplant.db.City;
-import com.ecnu.stu.myplant.db.County;
-import com.ecnu.stu.myplant.db.Province;
-import com.ecnu.stu.myplant.gson.Weather;
+import com.ecnu.myplant.db.City;
+import com.ecnu.myplant.db.County;
+import com.ecnu.myplant.db.Province;
+import com.ecnu.myplant.gson.Weather;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;

@@ -1,4 +1,4 @@
-package com.ecnu.stu.myplant.util;
+package com.ecnu.myplant.util;
 
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;

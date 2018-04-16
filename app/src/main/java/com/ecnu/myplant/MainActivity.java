@@ -1,4 +1,4 @@
-package com.ecnu.stu.myplant;
+package com.ecnu.myplant;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
@@ -23,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView positionText;
 
+    private MyLocationListener myLocationListener = new MyLocationListener();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLocationClient = new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(new MyLocationListener());
+        mLocationClient.registerLocationListener(myLocationListener);
         setContentView(R.layout.activity_main);
         positionText = (TextView) findViewById(R.id.position_text_view);
         List<String> permissionList = new ArrayList<>();

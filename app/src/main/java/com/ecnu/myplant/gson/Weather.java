@@ -1,4 +1,4 @@
-package com.ecnu.stu.myplant.gson;
+package com.ecnu.myplant.gson;
 
 /**
  * Created by Andrew Dong on 2018/4/13.

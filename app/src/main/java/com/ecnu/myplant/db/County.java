@@ -1,4 +1,4 @@
-package com.ecnu.stu.myplant.db;
+package com.ecnu.myplant.db;
 
 import org.litepal.crud.DataSupport;
 

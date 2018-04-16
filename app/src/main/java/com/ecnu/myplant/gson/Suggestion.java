@@ -1,4 +1,4 @@
-package com.ecnu.stu.myplant.gson;
+package com.ecnu.myplant.gson;
 
 import com.google.gson.annotations.SerializedName;
 
