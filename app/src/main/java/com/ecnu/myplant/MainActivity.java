@@ -17,6 +17,10 @@ import com.baidu.location.LocationClient;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用于初始化的类，初始化完成后再intent到其他的类中
+ */
+
 public class MainActivity extends AppCompatActivity {
 
     public LocationClient mLocationClient;
@@ -25,28 +29,35 @@ public class MainActivity extends AppCompatActivity {
 
     private MyLocationListener myLocationListener = new MyLocationListener();
 
+    private boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mLocationClient = new LocationClient(getApplicationContext());
-        mLocationClient.registerLocationListener(myLocationListener);
-        setContentView(R.layout.activity_main);
-        positionText = (TextView) findViewById(R.id.position_text_view);
-        List<String> permissionList = new ArrayList<>();
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
-        }
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.READ_PHONE_STATE);
-        }
-        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-        if (!permissionList.isEmpty()) {
-            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
-            ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
+        if (!flag){
+            super.onCreate(savedInstanceState);
+            mLocationClient = new LocationClient(getApplicationContext());
+            mLocationClient.registerLocationListener(myLocationListener);
+            setContentView(R.layout.activity_main);
+            positionText = (TextView) findViewById(R.id.position_text_view);
+            List<String> permissionList = new ArrayList<>();
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(Manifest.permission.READ_PHONE_STATE);
+            }
+            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            }
+            if (!permissionList.isEmpty()) {
+                String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+                ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
+            } else {
+                requestLocation();
+            }
+
+            flag = true;
         } else {
-            requestLocation();
+            //intent到另一个活动
         }
     }
 
