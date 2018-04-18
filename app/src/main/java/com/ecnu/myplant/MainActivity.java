@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 requestLocation();
             }
 
-            Button button = (Button) findViewById(R.id.button);
+            Button button = (Button) findViewById(R.id.button_1);
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
