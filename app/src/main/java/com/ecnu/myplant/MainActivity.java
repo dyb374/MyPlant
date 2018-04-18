@@ -59,8 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 requestLocation();
             }
 
-            Button button = (Button) findViewById(R.id.button_1);
-            button.setOnClickListener(new View.OnClickListener() {
+
+            /*
+            小人寻植按钮
+             */
+            Button button1 = (Button) findViewById(R.id.button_1);
+            button1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(MainActivity.this, MapActivity.class);
@@ -68,9 +72,21 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
+            /*
+            主界面测试
+             */
+            Button button2 = (Button) findViewById(R.id.button_2);
+            button2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent1 = new Intent(MainActivity.this, SceneOneActivity.class);
+                    startActivity(intent1);
+                }
+            });
 
             flag = true;
         } else {
+
             //intent到另一个活动
         }
     }

@@ -48,7 +48,11 @@
             android:process=":remote" />
 
         <activity android:name=".WeatherActivity" />
-        <activity android:name=".MapActivity"></activity>
+        <activity android:name=".MapActivity" />
+        <activity
+            android:name=".SceneOneActivity"
+            android:label="@string/title_activity_scene_one"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
