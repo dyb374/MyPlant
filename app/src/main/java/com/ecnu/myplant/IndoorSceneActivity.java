@@ -1,5 +1,6 @@
 package com.ecnu.myplant;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.TextView;
 
-public class SceneOneActivity extends AppCompatActivity {
+import com.ecnu.myplant.fragments.FragmentFive;
+import com.ecnu.myplant.fragments.FragmentFour;
+import com.ecnu.myplant.fragments.FragmentOne;
+import com.ecnu.myplant.fragments.FragmentSix;
+import com.ecnu.myplant.fragments.FragmentThree;
+import com.ecnu.myplant.fragments.FragmentTwo;
+
+public class IndoorSceneActivity extends AppCompatActivity {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -38,11 +47,23 @@ public class SceneOneActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scene_one);
+        setContentView(R.layout.activity_indoor_scene);
 
+
+        //最上方工具栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
+
+        Button button = (Button) findViewById(R.id.test_button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IndoorSceneActivity.this, OutdoorSceneActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        // Create the adapter that will return a fragment
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -50,6 +71,9 @@ public class SceneOneActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
+
+
+        //悬浮按钮操作
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,43 +109,9 @@ public class SceneOneActivity extends AppCompatActivity {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        public PlaceholderFragment() {
-        }
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static PlaceholderFragment newInstance(int sectionNumber) {
-            PlaceholderFragment fragment = new PlaceholderFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_scene_one, container, false);
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
-            return rootView;
-        }
-    }
-
-    /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
+     * 每个tab所呈现的内容(fragment)
      */
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -129,17 +119,31 @@ public class SceneOneActivity extends AppCompatActivity {
             super(fm);
         }
 
+        //不同tab呈现不同的内容，用switch实现
         @Override
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return new FragmentOne();
+                case 1:
+                    return new FragmentTwo();
+                case 2:
+                    return new FragmentThree();
+                case 3:
+                    return new FragmentFour();
+                case 4:
+                    return new FragmentFive();
+            }
+            return null;
         }
 
+        //tab的个数
         @Override
         public int getCount() {
-            // Show 8 total pages.
-            return 8;
+            // Show 5 total pages.
+            return 5;
         }
     }
 }

@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
-import com.ecnu.myplant.gson.Weather;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,9 +32,13 @@ public class MainActivity extends AppCompatActivity {
 
     private MyLocationListener myLocationListener = new MyLocationListener();
 
-    private boolean flag = false;
+    private static boolean flag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        /*
+        用户第一次使用时初始化数据库
+         */
+
         if (!flag){
             super.onCreate(savedInstanceState);
             mLocationClient = new LocationClient(getApplicationContext());
@@ -79,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
             button2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent1 = new Intent(MainActivity.this, SceneOneActivity.class);
+                    Intent intent1 = new Intent(MainActivity.this, IndoorSceneActivity.class);
                     startActivity(intent1);
                 }
             });

@@ -50,8 +50,12 @@
         <activity android:name=".WeatherActivity" />
         <activity android:name=".MapActivity" />
         <activity
-            android:name=".SceneOneActivity"
+            android:name=".IndoorSceneActivity"
             android:label="@string/title_activity_scene_one"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OutdoorSceneActivity"
+            android:label="@string/title_activity_outdoor_scene"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
