@@ -49,19 +49,11 @@ public class IndoorSceneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indoor_scene);
 
-
+        /*
         //最上方工具栏
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        Button button = (Button) findViewById(R.id.test_button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(IndoorSceneActivity.this, OutdoorSceneActivity.class);
-                startActivity(intent);
-            }
-        });
+        */
 
         // Create the adapter that will return a fragment
         // primary sections of the activity.
@@ -83,6 +75,14 @@ public class IndoorSceneActivity extends AppCompatActivity {
             }
         });
 
+        FloatingActionButton changeSence = (FloatingActionButton) findViewById(R.id.change_scene);
+        changeSence.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(IndoorSceneActivity.this, OutdoorSceneActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
