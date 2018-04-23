@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ecnu.myplant.fragments.FragmentFive;
 import com.ecnu.myplant.fragments.FragmentFour;
@@ -71,7 +72,12 @@ public class IndoorSceneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                        .setAction("Action", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(IndoorSceneActivity.this, "Test", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
             }
         });
 

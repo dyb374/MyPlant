@@ -1,6 +1,9 @@
 package com.ecnu.myplant;
 
+import android.content.DialogInterface;
 import android.content.res.AssetManager;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +53,29 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
 
 
     @Override
-    public void OnClick(View view, HotArea hotArea) {
-        Toast.makeText(MapActivity.this, "你点击了" + hotArea.getDesc(), Toast.LENGTH_SHORT).show();
+    public void OnClick(View view, final HotArea hotArea) {
+        String place = hotArea.getAreaId();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
+        dialog.setMessage("确认去" + hotArea.getAreaTitle() + "寻找植物？");
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Snackbar.make(mHotView, "小人已经去" + hotArea.getAreaTitle() + "寻找植物", Snackbar.LENGTH_LONG)
+                        .setAction("取消行程", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Toast.makeText(MapActivity.this, "你已取消旅程", Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
+            }
+        });
+        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.show();
     }
 }

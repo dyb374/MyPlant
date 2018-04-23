@@ -9,6 +9,7 @@
     android:background="@drawable/indoorbg"
     tools:context="com.ecnu.myplant.IndoorSceneActivity">
 
+
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
@@ -30,11 +31,13 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/change_scene"
-        android:layout_gravity="start|top"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|top"
         android:layout_margin="16dp"
         android:elevation="8dp"
-        android:layout_height="wrap_content"
-        app:srcCompat="@android:drawable/ic_dialog_dialer"/>
+        app:layout_anchor="@+id/container"
+        app:layout_anchorGravity="left|top"
+        app:srcCompat="@android:drawable/ic_dialog_dialer" />
 
 </android.support.design.widget.CoordinatorLayout>
