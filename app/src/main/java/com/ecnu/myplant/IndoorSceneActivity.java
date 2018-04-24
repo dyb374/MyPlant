@@ -1,5 +1,7 @@
 package com.ecnu.myplant;
 
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -18,6 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +43,18 @@ public class IndoorSceneActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
+    private FloatingActionButton fab;
+    private FloatingActionButton fabMap;
+    private FloatingActionButton fabWeather;
+    private FloatingActionButton fabAchievement;
+    private FloatingActionButton changeScene;
+    private boolean isAdd = false;
+    private AnimatorSet addBillTranslate1;
+    private AnimatorSet addBillTranslate2;
+    private AnimatorSet addBillTranslate3;
+    private int[] llId = new int[]{R.id.ll01,R.id.ll02,R.id.ll03};
+    private LinearLayout[] ll = new LinearLayout[llId.length];
+    private RelativeLayout addBill;//fab按钮点击后弹出的布局
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -56,33 +71,58 @@ public class IndoorSceneActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         */
 
-        // Create the adapter that will return a fragment
-        // primary sections of the activity.
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        initView();
+        setDefaultValues();
 
 
 
         //悬浮按钮操作
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                isAdd = !isAdd;
+                addBill.setVisibility(isAdd ? View.VISIBLE : View.GONE);
+                if (isAdd) {
+                    addBillTranslate1.setTarget(ll[0]);
+                    addBillTranslate1.start();
+                    addBillTranslate2.setTarget(ll[1]);
+                    addBillTranslate2.start();
+                    addBillTranslate3.setTarget(ll[2]);
+                    addBillTranslate3.start();
+                }
+                /*
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Toast.makeText(IndoorSceneActivity.this, "Test", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
+                */
+            }
+        });
+        fabMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideFABMenu();
+            }
+        });
+        fabWeather.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideFABMenu();
+            }
+        });
+        fabAchievement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideFABMenu();
             }
         });
 
-        FloatingActionButton changeSence = (FloatingActionButton) findViewById(R.id.change_scene);
-        changeSence.setOnClickListener(new View.OnClickListener() {
+
+        //切换场景按钮
+        changeScene.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, OutdoorSceneActivity.class);
@@ -151,5 +191,40 @@ public class IndoorSceneActivity extends AppCompatActivity {
             // Show 5 total pages.
             return 5;
         }
+    }
+
+    //隐藏fab按钮时的操作
+    private void hideFABMenu(){
+        addBill.setVisibility(View.GONE);
+        fab.setImageResource(R.mipmap.ic_launcher_round);
+        isAdd = false;
+    }
+
+    //实例化控件
+    private void initView(){
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fabMap = (FloatingActionButton) findViewById(R.id.miniFab01);
+        fabWeather = (FloatingActionButton) findViewById(R.id.miniFab02);
+        fabAchievement = (FloatingActionButton) findViewById(R.id.miniFab03);
+        changeScene = (FloatingActionButton) findViewById(R.id.change_scene);
+        addBill = (RelativeLayout) findViewById(R.id.addBill);
+
+        // Create the adapter that will return a fragment
+        // primary sections of the activity.
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        for (int i = 0; i < llId.length;i++){
+            ll[i] = (LinearLayout)findViewById(llId[i]);
+        }
+    }
+
+    private void setDefaultValues(){
+        addBillTranslate1 = (AnimatorSet) AnimatorInflater.loadAnimator(this,R.animator.add_bill_anim);
+        addBillTranslate2 = (AnimatorSet) AnimatorInflater.loadAnimator(this,R.animator.add_bill_anim);
+        addBillTranslate3 = (AnimatorSet) AnimatorInflater.loadAnimator(this,R.animator.add_bill_anim);
     }
 }
