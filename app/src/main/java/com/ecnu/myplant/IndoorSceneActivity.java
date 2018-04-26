@@ -104,6 +104,8 @@ public class IndoorSceneActivity extends AppCompatActivity {
         fabMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(IndoorSceneActivity.this, MapActivity.class);
+                startActivity(intent);
                 hideFABMenu();
             }
         });

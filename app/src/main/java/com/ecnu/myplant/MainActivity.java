@@ -64,18 +64,6 @@ public class MainActivity extends AppCompatActivity {
 
 
             /*
-            小人寻植按钮
-             */
-            Button button1 = (Button) findViewById(R.id.button_1);
-            button1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                    startActivity(intent);
-                }
-            });
-
-            /*
             主界面测试
              */
             Button button2 = (Button) findViewById(R.id.button_2);
