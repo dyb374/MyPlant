@@ -8,14 +8,16 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
+import com.baidu.location.BDAbstractLocationListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,11 +28,13 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    public LocationClient mLocationClient;
+    public LocationClient mLocationClient = null;
 
     private TextView positionText;
 
-    private MyLocationListener myLocationListener = new MyLocationListener();
+    public BDAbstractLocationListener myListener = new MyLocationListener();
+
+    public LocationClientOption option = new LocationClientOption();
 
     private static boolean flag = false;
     @Override
@@ -42,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
         if (!flag){
             super.onCreate(savedInstanceState);
             mLocationClient = new LocationClient(getApplicationContext());
-            mLocationClient.registerLocationListener(myLocationListener);
+            option.setIsNeedAddress(true);
+            mLocationClient.setLocOption(option);
+            mLocationClient.registerLocationListener( myListener );
             setContentView(R.layout.activity_main);
             positionText = (TextView) findViewById(R.id.position_text_view);
             List<String> permissionList = new ArrayList<>();
@@ -112,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public class MyLocationListener implements BDLocationListener {
+    public class MyLocationListener extends BDAbstractLocationListener {
 
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
@@ -125,7 +131,10 @@ public class MainActivity extends AppCompatActivity {
             } else if (bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
                 currentPosition.append("网络");
             }
-            positionText.setText(currentPosition);
+            String city = bdLocation.getCity();
+            positionText.setText(city);
         }
     }
+
+
 }
