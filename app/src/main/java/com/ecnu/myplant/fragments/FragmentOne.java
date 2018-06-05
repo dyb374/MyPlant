@@ -1,11 +1,13 @@
 package com.ecnu.myplant.fragments;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.ecnu.myplant.R;
 
@@ -20,6 +22,18 @@ public class FragmentOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //植物的不同成长阶段就加载不同的layout
         View view = inflater.inflate(R.layout.fragment_one, container, false);
+        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+
+        //为image设置点击事件
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //通过修改imageview的src来加载不同植物状态显示的图片
+        imageView.setImageResource(R.drawable.flower_pot);
         return view;
     }
+
 }

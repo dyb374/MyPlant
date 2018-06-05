@@ -23,7 +23,6 @@ import com.ecnu.myplant.gson.Weather;
 import com.ecnu.myplant.service.AutoUpdateService;
 import com.ecnu.myplant.service.CustomWeatherReport;
 import com.ecnu.myplant.util.HttpUtil;
-import com.ecnu.myplant.util.Utility;
 
 import java.io.IOException;
 

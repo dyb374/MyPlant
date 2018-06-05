@@ -19,7 +19,6 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDAbstractLocationListener;
-import com.ecnu.myplant.gson.Weather;
 import com.ecnu.myplant.service.CustomWeatherReport;
 
 import java.net.HttpURLConnection;
