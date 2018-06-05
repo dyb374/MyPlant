@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -43,11 +44,11 @@ public class IndoorSceneActivity extends AppCompatActivity {
      * {@link android.support.v4.app.FragmentStatePagerAdapter}.
      */
     private SectionsPagerAdapter mSectionsPagerAdapter;
-    private FloatingActionButton fab;
-    private FloatingActionButton fabMap;
-    private FloatingActionButton fabWeather;
-    private FloatingActionButton fabAchievement;
-    private Button changeScene;
+    private ImageView image;
+    private ImageView imageMap;
+    private ImageView imageWeather;
+    private ImageView imageAchievement;
+    private ImageView changeScene;
     private boolean isAdd = false;
     private AnimatorSet addBillTranslate1;
     private AnimatorSet addBillTranslate2;
@@ -77,7 +78,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
 
 
         //悬浮按钮操作
-        fab.setOnClickListener(new View.OnClickListener() {
+        image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 isAdd = !isAdd;
@@ -103,7 +104,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
                 */
             }
         });
-        fabMap.setOnClickListener(new View.OnClickListener() {
+        imageMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, MapActivity.class);
@@ -111,15 +112,15 @@ public class IndoorSceneActivity extends AppCompatActivity {
                 hideFABMenu();
             }
         });
-        fabWeather.setOnClickListener(new View.OnClickListener() {
+        imageWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, WeatherActivity.class);
                 startActivity(intent);
-                hideFABMenu();
+               hideFABMenu();
             }
         });
-        fabAchievement.setOnClickListener(new View.OnClickListener() {
+        imageAchievement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 hideFABMenu();
@@ -202,17 +203,16 @@ public class IndoorSceneActivity extends AppCompatActivity {
     //隐藏fab按钮时的操作
     private void hideFABMenu(){
         addBill.setVisibility(View.GONE);
-        fab.setImageResource(R.mipmap.ic_launcher_round);
         isAdd = false;
     }
 
     //实例化控件
     private void initView(){
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fabMap = (FloatingActionButton) findViewById(R.id.miniFab01);
-        fabWeather = (FloatingActionButton) findViewById(R.id.miniFab02);
-        fabAchievement = (FloatingActionButton) findViewById(R.id.miniFab03);
-        changeScene = (Button) findViewById(R.id.change_scene);
+        image = (ImageView) findViewById(R.id.image);
+        imageMap = (ImageView) findViewById(R.id.miniImage01);
+        imageWeather = (ImageView) findViewById(R.id.miniImage02);
+        imageAchievement = (ImageView) findViewById(R.id.miniImage03);
+        changeScene = (ImageView) findViewById(R.id.change_scene);
         addBill = (RelativeLayout) findViewById(R.id.addBill);
 
         // Create the adapter that will return a fragment
