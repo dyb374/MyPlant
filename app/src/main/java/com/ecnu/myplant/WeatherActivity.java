@@ -3,6 +3,8 @@ package com.ecnu.myplant;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.ecnu.myplant.gson.Weather;
 import com.ecnu.myplant.service.AutoUpdateService;
+import com.ecnu.myplant.service.CustomWeatherReport;
 import com.ecnu.myplant.util.HttpUtil;
 import com.ecnu.myplant.util.Utility;
 
@@ -50,6 +53,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     private String mWeatherId;
 
+    private Weather weather;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +68,15 @@ public class WeatherActivity extends AppCompatActivity {
         aqiText = (TextView) findViewById(R.id.aqi_text);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        requestWeather();
+        String info = "温度：" + weather.temp + "℃" + "\n"
+                + "风向：" + weather.wind_direction + "\n"
+                + "风力：" + weather.wind_strength + "\n"
+                + "湿度：" + weather.humidity + "\n"
+                + "时间：" + weather.time + "\n"
+                + "紫外线：" + weather.uv_index;                                 //API的干燥度都为空
+        weatherInfoText.setText(info);
+        /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
             // 有缓存时直接解析天气数据
@@ -77,8 +89,8 @@ public class WeatherActivity extends AppCompatActivity {
             weatherLayout.setVisibility(View.INVISIBLE);
             mWeatherId = "CN101021500";//以普陀区为例
             requestWeather(mWeatherId);
-        }
-
+        }*/
+        requestWeather();
 
 
     }
@@ -86,7 +98,7 @@ public class WeatherActivity extends AppCompatActivity {
     /**
      * 根据天气id请求城市天气信息。
      */
-    public void requestWeather(final String weatherId) {
+    /*public void requestWeather(final String weatherId) {
         String weatherUrl = "http://guolin.tech/api/weather?cityid=" + weatherId + "&key=bc0418b57b2d4918819d3974ac1285d9";
         HttpUtil.sendOkHttpRequest(weatherUrl, new Callback() {
             @Override
@@ -99,7 +111,7 @@ public class WeatherActivity extends AppCompatActivity {
                         if (weather != null && "ok".equals(weather.status)) {
                             SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(WeatherActivity.this).edit();
                             editor.putString("weather", responseText);
-                            editor.apply();
+                            //editor.apply();
                             mWeatherId = weather.basic.weatherId;
                             showWeatherInfo(weather);
                         } else {
@@ -122,13 +134,13 @@ public class WeatherActivity extends AppCompatActivity {
                 });
             }
         });
-    }
+    }*/
 
 
     /**
      * 处理并展示Weather实体类中的数据。
      */
-    private void showWeatherInfo(Weather weather) {
+    /*private void showWeatherInfo(Weather weather) {
         String cityName = weather.basic.cityName;
         String updateTime = weather.basic.update.updateTime.split(" ")[1];
         String degree = weather.now.temperature + "℃";
@@ -147,6 +159,17 @@ public class WeatherActivity extends AppCompatActivity {
         weatherLayout.setVisibility(View.VISIBLE);
         Intent intent = new Intent(this, AutoUpdateService.class);
         startService(intent);
+    }*/
+
+    public void requestWeather() {
+        //在模拟器上无法获取city的值，用真机时用注释替换就行，这里用上海代替
+        /*String city = MainActivity.city.replace("市","");              //地图API和天气API的城市名字差了一个"市"字
+        CustomWeatherReport.getWeatherJSON(city);
+        */
+        String city = "上海";
+        CustomWeatherReport.getWeatherJSON(city);
+        CustomWeatherReport.getSimpleWeatherJSON();
+        weather = CustomWeatherReport.JSONToWeather();
     }
 
 }

@@ -114,6 +114,8 @@ public class IndoorSceneActivity extends AppCompatActivity {
         fabWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(IndoorSceneActivity.this, WeatherActivity.class);
+                startActivity(intent);
                 hideFABMenu();
             }
         });

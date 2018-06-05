@@ -19,7 +19,8 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDAbstractLocationListener;
-import com.ecnu.myplant.service.WeatherReportByCity;
+import com.ecnu.myplant.gson.Weather;
+import com.ecnu.myplant.service.CustomWeatherReport;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public LocationClientOption option = new LocationClientOption();
 
     private static boolean flag = false;
+
+    public static String city;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*
@@ -86,6 +89,8 @@ public class MainActivity extends AppCompatActivity {
             });
 
             flag = true;
+
+
         } else {
 
             //intent到另一个活动
@@ -135,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
                 currentPosition.append("网络");
             }
-            String city = bdLocation.getCity();
+            city = bdLocation.getCity();
             positionText.setText(city);
         }
     }
