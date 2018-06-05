@@ -95,6 +95,7 @@ public class OutdoorSceneActivity extends AppCompatActivity {
                     addBillTranslate3.setStartDelay(200);
                     addBillTranslate3.start();
                 }
+                hideFAB();
                 /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_INDEFINITE)
                         .setAction("Action", new View.OnClickListener() {
@@ -110,6 +111,7 @@ public class OutdoorSceneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 hideFABMenu();
+                showFAB();
             }
         });
 
@@ -119,6 +121,7 @@ public class OutdoorSceneActivity extends AppCompatActivity {
                 Intent intent = new Intent(OutdoorSceneActivity.this, MapActivity.class);
                 startActivity(intent);
                 hideFABMenu();
+                showFAB();
             }
         });
         imageWeather.setOnClickListener(new View.OnClickListener() {
@@ -127,6 +130,7 @@ public class OutdoorSceneActivity extends AppCompatActivity {
                 Intent intent = new Intent(OutdoorSceneActivity.this, WeatherActivity.class);
                 startActivity(intent);
                 hideFABMenu();
+                showFAB();
             }
         });
         imageAchievement.setOnClickListener(new View.OnClickListener() {
@@ -148,10 +152,19 @@ public class OutdoorSceneActivity extends AppCompatActivity {
     }
 
 
-    //隐藏fab按钮时的操作
-    private void hideFABMenu() {
+    //隐藏fab菜单按钮时的操作
+    private void hideFABMenu(){
         addBill.setVisibility(View.GONE);
         isAdd = false;
+    }
+
+    //隐藏fab按钮时的操作
+    private void hideFAB(){
+        image.setVisibility(View.GONE);
+    }
+
+    private void showFAB(){
+        image.setVisibility(View.VISIBLE);
     }
 
     //实例化控件
