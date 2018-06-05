@@ -47,7 +47,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
     private FloatingActionButton fabMap;
     private FloatingActionButton fabWeather;
     private FloatingActionButton fabAchievement;
-    private FloatingActionButton changeScene;
+    private Button changeScene;
     private boolean isAdd = false;
     private AnimatorSet addBillTranslate1;
     private AnimatorSet addBillTranslate2;
@@ -86,8 +86,10 @@ public class IndoorSceneActivity extends AppCompatActivity {
                     addBillTranslate1.setTarget(ll[0]);
                     addBillTranslate1.start();
                     addBillTranslate2.setTarget(ll[1]);
+                    addBillTranslate2.setStartDelay(100);
                     addBillTranslate2.start();
                     addBillTranslate3.setTarget(ll[2]);
+                    addBillTranslate3.setStartDelay(200);
                     addBillTranslate3.start();
                 }
                 /*
@@ -208,7 +210,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
         fabMap = (FloatingActionButton) findViewById(R.id.miniFab01);
         fabWeather = (FloatingActionButton) findViewById(R.id.miniFab02);
         fabAchievement = (FloatingActionButton) findViewById(R.id.miniFab03);
-        changeScene = (FloatingActionButton) findViewById(R.id.change_scene);
+        changeScene = (Button) findViewById(R.id.change_scene);
         addBill = (RelativeLayout) findViewById(R.id.addBill);
 
         // Create the adapter that will return a fragment
