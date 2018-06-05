@@ -104,6 +104,13 @@ public class IndoorSceneActivity extends AppCompatActivity {
                 */
             }
         });
+        addBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                hideFABMenu();
+            }
+        });
+
         imageMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
