@@ -3,6 +3,7 @@ package com.ecnu.myplant;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -80,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             LitePal.getDatabase();
             Intent intent = new Intent(MainActivity.this, InitializeDatabase.class);
             startService(intent);
-
+            //positionText.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/ddyy.ttf"));
             /*
             主界面测试
              */
