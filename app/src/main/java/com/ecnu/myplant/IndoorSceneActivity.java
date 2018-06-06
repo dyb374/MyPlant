@@ -125,7 +125,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, MapActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
                 hideFABMenu();
                 showFAB();
             }
@@ -263,4 +263,23 @@ public class IndoorSceneActivity extends AppCompatActivity {
         addBillTranslate2 = (AnimatorSet) AnimatorInflater.loadAnimator(this,R.animator.add_bill_anim);
         addBillTranslate3 = (AnimatorSet) AnimatorInflater.loadAnimator(this,R.animator.add_bill_anim);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case 1:
+                refresh();
+                break;
+            default:
+                break;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public void refresh() {
+        finish();
+        Intent intent = new Intent(IndoorSceneActivity.this, IndoorSceneActivity.class);
+        startActivity(intent);
+    }
+
 }

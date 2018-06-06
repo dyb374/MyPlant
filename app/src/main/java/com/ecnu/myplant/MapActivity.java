@@ -83,4 +83,11 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
         });
         dialog.show();
     }
+
+    @Override
+    protected void onDestroy() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        super.onDestroy();
+    }
 }
