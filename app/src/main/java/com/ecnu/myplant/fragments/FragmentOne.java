@@ -46,10 +46,9 @@ public class FragmentOne extends Fragment {
             String plantName = pp.getPlant();
             List<Plant> plants = DataSupport.findAll(Plant.class);
             for(Plant p : plants){
-                if(plantName.equals(p.getName()) && p.getPlantId() == 1){
+                if(plantName.equals(p.getName()) && p.getPlantId() == 1)
                     has = true;
-                    break;
-                }
+                break;
             }
         }
         if(has)
