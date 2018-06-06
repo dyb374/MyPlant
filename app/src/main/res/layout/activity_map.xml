@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:background="@drawable/bg1">
 
+
     <com.dreamlive.hotimglibrary.view.HotClickView
         android:id="@+id/hotview"
         android:layout_width="match_parent"
