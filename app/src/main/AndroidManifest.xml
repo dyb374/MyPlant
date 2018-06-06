@@ -56,7 +56,16 @@
         <activity
             android:name=".OutdoorSceneActivity"
             android:label="@string/title_activity_outdoor_scene"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <service
+            android:name=".service.FindPlant"
+            android:enabled="true"
+            android:exported="true" />
+        <service
+            android:name=".service.InitializeDatabase"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

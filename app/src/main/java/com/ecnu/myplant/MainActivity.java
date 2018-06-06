@@ -20,6 +20,9 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDAbstractLocationListener;
 import com.ecnu.myplant.service.CustomWeatherReport;
+import com.ecnu.myplant.service.InitializeDatabase;
+
+import org.litepal.LitePal;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -74,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
                 requestLocation();
             }
 
+            LitePal.getDatabase();
+            Intent intent = new Intent(MainActivity.this, InitializeDatabase.class);
+            startService(intent);
 
             /*
             主界面测试

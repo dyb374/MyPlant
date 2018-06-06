@@ -1,6 +1,7 @@
 package com.ecnu.myplant;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +16,7 @@ import java.io.InputStream;
 import com.dreamlive.hotimglibrary.entity.HotArea;
 import com.dreamlive.hotimglibrary.utils.FileUtils;
 import com.dreamlive.hotimglibrary.view.HotClickView;
+import com.ecnu.myplant.service.FindPlant;
 
 public class MapActivity extends AppCompatActivity implements HotClickView.OnClickListener{
 
@@ -68,6 +70,9 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
                                 Toast.makeText(MapActivity.this, "你已取消旅程", Toast.LENGTH_SHORT).show();
                             }
                         }).show();
+                Intent intent = new Intent(MapActivity.this, FindPlant.class);
+                intent.putExtra("province", hotArea.getAreaTitle());
+                startService(intent);
             }
         });
         dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {

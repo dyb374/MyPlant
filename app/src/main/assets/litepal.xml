@@ -2,16 +2,10 @@
 
     <dbname value = "MyPlant" />
 
-    <version value = "1" />
+    <version value = "7" />
 
     <list>
-        <mapping class = "com.ecnu.myplant.db.Province" />
-        <mapping class = "com.ecnu.myplant.db.City" />
-        <mapping class = "com.ecnu.myplant.db.County" />
-        <mapping class= "com.ecnu.myplant.db.FirstTypeIndoorPlant" />
-        <mapping class= "com.ecnu.myplant.db.FirstTypeOutdoorPlant" />
-        <mapping class= "com.ecnu.myplant.db.SecondTypeIndoorPlant" />
-        <mapping class= "com.ecnu.myplant.db.IndoorClimate" />
-        <mapping class= "com.ecnu.myplant.db.OutdoorClimate" />
+        <mapping class= "com.ecnu.myplant.db.Plant" />
+        <mapping class= "com.ecnu.myplant.db.ProvincePlant" />
     </list>
 </litepal>
