@@ -17,10 +17,10 @@ public class InitializeDatabase extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String[] plantName = {"bamboo", "仙人球", "牡丹", "桂花", "月季", "樱花", "海棠", "菊花", "百合", "白玉兰"};
+        String[] plantName = {"bamboo", "cactus", "peony", "acacia", "rose", "lily", "begonia", "magnolia"};
         for(int i = 0; i < plantName.length; i++) {
             Plant p = new Plant();
-            p.setId(i);
+            p.setPlantId(i + 1);
             p.setName(plantName[i]);
             p.save();
         }

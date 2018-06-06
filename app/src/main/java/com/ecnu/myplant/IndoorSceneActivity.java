@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,12 +27,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ecnu.myplant.db.Plant;
+import com.ecnu.myplant.db.ProvincePlant;
 import com.ecnu.myplant.fragments.FragmentFive;
 import com.ecnu.myplant.fragments.FragmentFour;
 import com.ecnu.myplant.fragments.FragmentOne;
 import com.ecnu.myplant.fragments.FragmentSix;
 import com.ecnu.myplant.fragments.FragmentThree;
 import com.ecnu.myplant.fragments.FragmentTwo;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 public class IndoorSceneActivity extends AppCompatActivity {
 
@@ -56,6 +63,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
     private int[] llId = new int[]{R.id.ll01,R.id.ll02,R.id.ll03};
     private LinearLayout[] ll = new LinearLayout[llId.length];
     private RelativeLayout addBill;//fab按钮点击后弹出的布局
+    private static final String TAG = "IndoorSceneActivity";
     /**
      * The {@link ViewPager} that will host the section contents.
      */
@@ -147,6 +155,8 @@ public class IndoorSceneActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 
 

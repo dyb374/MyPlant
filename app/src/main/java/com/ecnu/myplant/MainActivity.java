@@ -20,10 +20,12 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDAbstractLocationListener;
+import com.ecnu.myplant.db.Plant;
 import com.ecnu.myplant.service.CustomWeatherReport;
 import com.ecnu.myplant.service.InitializeDatabase;
 
 import org.litepal.LitePal;
+import org.litepal.crud.DataSupport;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -79,8 +81,11 @@ public class MainActivity extends AppCompatActivity {
             }
 
             LitePal.getDatabase();
-            Intent intent = new Intent(MainActivity.this, InitializeDatabase.class);
-            startService(intent);
+            List<Plant> plants = DataSupport.findAll(Plant.class);
+            if(plants.size() == 0) {
+                Intent intent = new Intent(MainActivity.this, InitializeDatabase.class);
+                startService(intent);
+            }
             //positionText.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/ddyy.ttf"));
             /*
             主界面测试

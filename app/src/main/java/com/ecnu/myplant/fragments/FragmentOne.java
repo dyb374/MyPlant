@@ -10,6 +10,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.ecnu.myplant.R;
+import com.ecnu.myplant.db.Plant;
+import com.ecnu.myplant.db.ProvincePlant;
+
+import org.litepal.crud.DataSupport;
+
+import java.util.List;
 
 /**
  * Created by Andrew Dong on 2018/4/19.
@@ -32,7 +38,23 @@ public class FragmentOne extends Fragment {
             }
         });
         //通过修改imageview的src来加载不同植物状态显示的图片
-        imageView.setImageResource(R.drawable.flower_pot);
+        List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
+        boolean has = false;
+        for(ProvincePlant pp : pps) {
+            if(has == true)
+                break;
+            String plantName = pp.getPlant();
+            List<Plant> plants = DataSupport.findAll(Plant.class);
+            for(Plant p : plants){
+                if(plantName.equals(p.getName()) && p.getPlantId() == 1)
+                    has = true;
+                break;
+            }
+        }
+        if(has)
+            imageView.setImageResource(R.drawable.flower_pot);
+        /*else
+            imageView.setImageResource(R.drawable.flower_pot);*/
         return view;
     }
 

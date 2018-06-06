@@ -30,10 +30,10 @@ public class FindPlant extends Service {
         String province = intent.getStringExtra("province");
         Log.d(TAG, "onStartCommand: "+province);
         List<Plant> plants = DataSupport.findAll(Plant.class);
-        int plantId = (int) (Math.random() * 10 + 1);
+        int plantId = (int) (Math.random() * plants.size() + 1);
         String plantName = null;
         for(Plant p : plants){
-            if(p.getId() == plantId)
+            if(p.getPlantId() == plantId)
                 plantName = p.getName();
 
         }
@@ -41,6 +41,8 @@ public class FindPlant extends Service {
         pp.setProvince(province);
         pp.setPlant(plantName);
         pp.save();
+
+
         return super.onStartCommand(intent, flags, startId);
     }
 

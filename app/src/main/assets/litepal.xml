@@ -2,7 +2,7 @@
 
     <dbname value = "MyPlant" />
 
-    <version value = "7" />
+    <version value = "1" />
 
     <list>
         <mapping class= "com.ecnu.myplant.db.Plant" />
