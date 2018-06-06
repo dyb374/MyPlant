@@ -30,7 +30,7 @@ public class FragmentOne extends Fragment {
         //植物的不同成长阶段就加载不同的layout
         View view = inflater.inflate(R.layout.fragment_one, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
-        final LinearLayout tools = (LinearLayout) view.findViewById(R.id.tools);
+        final LinearLayout tools = (LinearLayout) view.findViewById(R.id.indoor_tools);
         //为image设置点击事件
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

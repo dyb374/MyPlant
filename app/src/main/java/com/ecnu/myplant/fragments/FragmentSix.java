@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.ecnu.myplant.R;
 import com.ecnu.myplant.db.Plant;
@@ -28,12 +29,12 @@ public class FragmentSix extends Fragment {
         //植物的不同成长阶段就加载不同的layout
         View view = inflater.inflate(R.layout.fragment_six, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
-
+        final LinearLayout tools = (LinearLayout) view.findViewById(R.id.outdoor_tools);
         //为image设置点击事件
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                tools.setVisibility(View.VISIBLE);
             }
         });
         //通过修改imageview的src来加载不同植物状态显示的图片
