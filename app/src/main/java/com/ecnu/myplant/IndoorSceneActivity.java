@@ -151,8 +151,30 @@ public class IndoorSceneActivity extends AppCompatActivity {
         changeScene.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(IndoorSceneActivity.this, OutdoorSceneActivity.class);
-                startActivity(intent);
+                List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
+                for(ProvincePlant pp : pps) {
+                    Log.d(TAG, "province: " + pp.getProvince());
+                    Log.d(TAG, "plant: " + pp.getPlant());
+                }
+                List<Plant> plants = DataSupport.findAll(Plant.class);
+                for(Plant p : plants){
+                    Log.d(TAG, "id: " + p.getPlantId());
+                    Log.d(TAG, "name: " + p.getName());
+                }
+                boolean has = false;
+                for(ProvincePlant pp : pps) {
+                    Log.d(TAG, "ProvincePlant province: " + pp.getProvince());
+                    Log.d(TAG, "ProvincePlant plant: " + pp.getPlant());
+                    String plantName = pp.getPlant();
+                    for(Plant p : plants){
+                        Log.d(TAG, "id: " + p.getPlantId());
+                        Log.d(TAG, "name: " + p.getName());
+                        if(plantName.equals(p.getName()) && p.getPlantId() == 2){
+                            Log.d(TAG, "!!!!!!!!!!");
+                        }
+                        break;
+                    }
+                }
             }
         });
 
