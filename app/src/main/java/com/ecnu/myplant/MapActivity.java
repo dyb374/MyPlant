@@ -8,6 +8,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.io.InputStream;
@@ -16,11 +18,19 @@ import java.io.InputStream;
 import com.dreamlive.hotimglibrary.entity.HotArea;
 import com.dreamlive.hotimglibrary.utils.FileUtils;
 import com.dreamlive.hotimglibrary.view.HotClickView;
+import com.ecnu.myplant.layout.MapDialogLayout;
 import com.ecnu.myplant.service.FindPlant;
 
 public class MapActivity extends AppCompatActivity implements HotClickView.OnClickListener{
 
     private HotClickView mHotView;
+    private LinearLayout bottom;
+    private ImageView cancel;
+    private MapDialogLayout dialogLayout;
+    ImageView dialog_cancel;
+    ImageView ok;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +42,11 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
 
     private void initParam() {
         mHotView = (HotClickView) findViewById(R.id.hotview);
+        bottom = (LinearLayout) findViewById(R.id.map_bottom);
+        cancel = (ImageView) findViewById(R.id.bottom_cancel_button);
+        dialogLayout = (MapDialogLayout) findViewById(R.id.map_dialog);
+        dialog_cancel = (ImageView) findViewById(R.id.cancel_button);
+        ok = (ImageView) findViewById(R.id.ok_button);
 //        mHotView.setCanMove(false);
 //        mHotView.setCanScale(false);
     }
@@ -57,31 +72,31 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
     @Override
     public void OnClick(View view, final HotArea hotArea) {
         String place = hotArea.getAreaId();
-        AlertDialog.Builder dialog = new AlertDialog.Builder(MapActivity.this);
-        dialog.setMessage("确认去" + hotArea.getAreaTitle() + "寻找植物？");
-        dialog.setCancelable(true);
-        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        dialogLayout.setVisibility(View.VISIBLE);
+        dialog_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Snackbar.make(mHotView, "小人已经去" + hotArea.getAreaTitle() + "寻找植物", Snackbar.LENGTH_LONG)
-                        .setAction("取消行程", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                Toast.makeText(MapActivity.this, "你已取消旅程", Toast.LENGTH_SHORT).show();
-                            }
-                        }).show();
+            public void onClick(View view) {
+                dialogLayout.setVisibility(View.GONE);
+            }
+        });
+
+        ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialogLayout.setVisibility(View.GONE);
+                bottom.setVisibility(View.VISIBLE);
+                cancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        bottom.setVisibility(View.GONE);
+                        //停止服务
+                    }
+                });
                 Intent intent = new Intent(MapActivity.this, FindPlant.class);
                 intent.putExtra("province", hotArea.getAreaTitle());
                 startService(intent);
             }
         });
-        dialog.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        dialog.show();
     }
 
     @Override
