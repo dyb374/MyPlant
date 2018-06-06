@@ -14,6 +14,16 @@ public class FirstTypeIndoorPlant extends DataSupport {
     private int stateOfLife;//生命状态0-死亡，1-健康，2-不健康
     private int level;//根据成长情况取值，比如0-50是小芽但慢慢变大，51-150是小植株
     private int waterContent;//0-100
+    private int soilFertility;//0-100
+    private int leafCondition;//0-100
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -39,6 +49,14 @@ public class FirstTypeIndoorPlant extends DataSupport {
         this.stateOfLife = stateOfLife;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
     public int getWaterContent() {
         return waterContent;
     }
@@ -47,15 +65,19 @@ public class FirstTypeIndoorPlant extends DataSupport {
         this.waterContent = waterContent;
     }
 
-    public int getId() {return id;}
-
-    public void setId(int id) {this.id = id;}
-
-    public int getLevel() {
-        return level;
+    public int getSoilFertility() {
+        return soilFertility;
     }
 
-    public void setLevel(int level) {
-        this.level = level;
+    public void setSoilFertility(int soilFertility) {
+        this.soilFertility = soilFertility;
+    }
+
+    public int getLeafCondition() {
+        return leafCondition;
+    }
+
+    public void setLeafCondition(int leafCondition) {
+        this.leafCondition = leafCondition;
     }
 }
