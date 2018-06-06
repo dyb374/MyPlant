@@ -26,7 +26,7 @@ public class FragmentEight extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //植物的不同成长阶段就加载不同的layout
-        View view = inflater.inflate(R.layout.fragment_one, container, false);
+        View view = inflater.inflate(R.layout.fragment_eight, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
 
         //为image设置点击事件

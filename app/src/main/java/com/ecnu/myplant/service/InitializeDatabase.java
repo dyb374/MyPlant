@@ -3,10 +3,13 @@ package com.ecnu.myplant.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.ecnu.myplant.db.Plant;
 
 public class InitializeDatabase extends Service {
+
+    private static final String TAG = "InitializeDatabase";
     public InitializeDatabase() {
     }
 
@@ -24,11 +27,13 @@ public class InitializeDatabase extends Service {
             p.setName(plantName[i]);
             p.save();
         }
+        stopSelf();
         return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
     public void onDestroy() {
+        Log.d(TAG, "onDestroy: " + TAG);
         super.onDestroy();
     }
 

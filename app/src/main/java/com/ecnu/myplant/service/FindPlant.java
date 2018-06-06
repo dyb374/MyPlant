@@ -41,8 +41,7 @@ public class FindPlant extends Service {
         pp.setProvince(province);
         pp.setPlant(plantName);
         pp.save();
-
-
+        onCount();
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -56,4 +55,19 @@ public class FindPlant extends Service {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+
+    private void onCount(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(1800000);      //运行30分钟后停止
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                stopSelf();
+            }
+        }).start();
+    }
+
 }
