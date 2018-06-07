@@ -24,7 +24,9 @@ import java.util.List;
 public class SeedActivity extends AppCompatActivity {
 
     private ImageView back;
-    private LinearLayout linlar;
+    private LinearLayout linlar0;
+    private LinearLayout linlar1;
+    private LinearLayout linlar2;
     private List<Seed> seedList = new ArrayList<Seed>();
 
 
@@ -35,7 +37,9 @@ public class SeedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_seed);
         back = (ImageView) findViewById(R.id.return_main);
         // Set up the ViewPager with the sections adapter.
-        linlar  = (LinearLayout) findViewById(R.id.linla);
+        linlar0  = (LinearLayout) findViewById(R.id.linla0);
+        linlar1  = (LinearLayout) findViewById(R.id.linla1);
+        linlar2  = (LinearLayout) findViewById(R.id.linla2);
         Intent intent = getIntent();
         int plantId = intent.getIntExtra("plantId", -1);
         initSeeds(plantId); // 初始化seed数据
