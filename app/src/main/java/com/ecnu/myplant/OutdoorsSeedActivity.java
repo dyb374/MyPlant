@@ -59,7 +59,7 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
                     mp.setPlant(seed.getName());
                     mp.save();
                     Toast.makeText(OutdoorsSeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(OutdoorsSeedActivity.this, IndoorSceneActivity.class);
+                    Intent intent = new Intent(OutdoorsSeedActivity.this, OutdoorSceneActivity.class);
                     startActivity(intent);
                 }
             }

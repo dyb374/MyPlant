@@ -128,7 +128,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, MapActivity.class);
-                startActivityForResult(intent, 1);
+                startActivity(intent);
                 hideFABMenu();
                 showFAB();
             }
@@ -138,8 +138,8 @@ public class IndoorSceneActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, WeatherActivity.class);
                 startActivity(intent);
-               hideFABMenu();
-               showFAB();
+                 hideFABMenu();
+                 showFAB();
             }
         });
         imageAchievement.setOnClickListener(new View.OnClickListener() {
@@ -266,22 +266,22 @@ public class IndoorSceneActivity extends AppCompatActivity {
         addBillTranslate3 = (AnimatorSet) AnimatorInflater.loadAnimator(this,R.animator.add_bill_anim);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch (requestCode) {
-            case 1:
-                refresh();
-                break;
-            default:
-                break;
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void refresh() {
-        finish();
-        Intent intent = new Intent(IndoorSceneActivity.this, IndoorSceneActivity.class);
-        startActivity(intent);
-    }
+    //    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        switch (requestCode) {
+//            case 1:
+//                refresh();
+//                break;
+//            default:
+//                break;
+//        }
+//        super.onActivityResult(requestCode, resultCode, data);
+//    }
+//
+//    public void refresh() {
+//        finish();
+//        Intent intent = new Intent(IndoorSceneActivity.this, IndoorSceneActivity.class);
+//        startActivity(intent);
+//    }
 
 }

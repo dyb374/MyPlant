@@ -119,8 +119,8 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
 
     @Override
     protected void onDestroy() {
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
+//        Intent intent = new Intent();
+//        setResult(RESULT_OK, intent);
         super.onDestroy();
     }
 
