@@ -33,7 +33,7 @@ public class FindPlant extends Service {
         int plantId = (int) (Math.random() * plants.size() + 1);
         String plantName = null;
         for(Plant p : plants){
-            if(p.getPlantId() == plantId)
+            if(p.getId() == plantId)
                 plantName = p.getName();
 
         }

@@ -7,5 +7,6 @@
     <list>
         <mapping class= "com.ecnu.myplant.db.Plant" />
         <mapping class= "com.ecnu.myplant.db.ProvincePlant" />
+        <mapping class= "com.ecnu.myplant.db.MyPlant" />
     </list>
 </litepal>

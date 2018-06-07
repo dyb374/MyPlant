@@ -23,7 +23,6 @@ public class InitializeDatabase extends Service {
         String[] plantName = {"bamboo", "cactus", "peony", "acacia", "rose", "lily", "begonia", "magnolia"};
         for(int i = 0; i < plantName.length; i++) {
             Plant p = new Plant();
-            p.setPlantId(i + 1);
             p.setName(plantName[i]);
             p.save();
         }

@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import com.ecnu.myplant.OutdoorsSeedActivity;
 import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
+import com.ecnu.myplant.db.MyPlant;
 import com.ecnu.myplant.db.Plant;
 import com.ecnu.myplant.db.ProvincePlant;
 import com.ecnu.myplant.service.ViewAnimation;
@@ -37,15 +38,15 @@ public class FragmentEight extends Fragment {
         final LinearLayout tools = (LinearLayout) view.findViewById(R.id.outdoor_tools);
 
         //通过修改imageview的src来加载不同植物状态显示的图片
-        List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
         boolean has = false;
-        for(ProvincePlant pp : pps) {
+        List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+        for(MyPlant mp : mps) {
             if(has == true)
                 break;
-            String plantName = pp.getPlant();
+            String plantName = mp.getPlant();
             List<Plant> plants = DataSupport.findAll(Plant.class);
             for(Plant p : plants){
-                if(plantName.equals(p.getName()) && p.getPlantId() == 1) {
+                if(plantName.equals(p.getName()) && p.getId() == 5) {
                     has = true;
                     break;
                 }
@@ -70,6 +71,7 @@ public class FragmentEight extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), OutdoorsSeedActivity.class);
+                    intent1.putExtra("plantId", 8);
                     startActivity(intent1);
                 }
             });

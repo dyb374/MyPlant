@@ -9,15 +9,15 @@ import org.litepal.crud.DataSupport;
  */
 
 public class Plant extends DataSupport{
-    private int plantId;
+    private int id;
     private String name;
 
-    public int getPlantId() {
-        return plantId;
+    public int getId() {
+        return id;
     }
 
-    public void setPlantId(int plantId) {
-        this.plantId = plantId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {

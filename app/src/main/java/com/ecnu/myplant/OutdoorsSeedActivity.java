@@ -11,6 +11,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.ecnu.myplant.db.MyPlant;
+import com.ecnu.myplant.db.Plant;
+import com.ecnu.myplant.db.ProvincePlant;
+
+import org.litepal.crud.DataSupport;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +35,9 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
         back = (ImageView) findViewById(R.id.return_main);
         // Set up the ViewPager with the sections adapter.
         linlar  = (LinearLayout) findViewById(R.id.linla);
-        initSeeds(); // 初始化seed数据
+        Intent intent = getIntent();
+        int plantId = intent.getIntExtra("plantId", -1);
+        initSeeds(plantId); // 初始化seed数据
         SeedAdapter adapter = new SeedAdapter(OutdoorsSeedActivity.this, R.layout.seed_item, seedList);
         ListView listView = (ListView) findViewById(R.id.list_viewex);
         listView.setAdapter(adapter);
@@ -37,8 +45,23 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                Seed seed = seedList.get(position);
-                Toast.makeText(OutdoorsSeedActivity.this, seed.getName(), Toast.LENGTH_SHORT).show();
+                com.ecnu.myplant.Seed seed = seedList.get(position);
+                boolean has = false;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                for(MyPlant mp : mps) {
+                    if (mp.getPlant().equals(seed.getName())) {
+                        has = true;
+                        Toast.makeText(OutdoorsSeedActivity.this, "你已领养了植物:" + seed.getName() + "！", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                if(!has){
+                    MyPlant mp = new MyPlant();
+                    mp.setPlant(seed.getName());
+                    mp.save();
+                    Toast.makeText(OutdoorsSeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(OutdoorsSeedActivity.this, IndoorSceneActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -55,28 +78,17 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
     }
 
 
-    private void initSeeds() {
-        for (int i = 0; i < 2; i++) {
-            Seed apple = new Seed("Apple", R.drawable.ok);
-            seedList.add(apple);
-            Seed banana = new Seed("Banana", R.drawable.ok);
-            seedList.add(banana);
-            Seed orange = new Seed("Orange", R.drawable.ok);
-            seedList.add(orange);
-            Seed watermelon = new Seed("Watermelon", R.drawable.ok);
-            seedList.add(watermelon);
-            Seed pear = new Seed("Pear", R.drawable.ok);
-            seedList.add(pear);
-            Seed grape = new Seed("Grape", R.drawable.ok);
-            seedList.add(grape);
-            Seed pineapple = new Seed("Pineapple", R.drawable.ok);
-            seedList.add(pineapple);
-            Seed strawberry = new Seed("Strawberry", R.drawable.ok);
-            seedList.add(strawberry);
-            Seed cherry = new Seed("Cherry", R.drawable.ok);
-            seedList.add(cherry);
-            Seed mango = new Seed("Mango", R.drawable.ok);
-            seedList.add(mango);
+    private void initSeeds(int plantId) {
+        List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
+        for (ProvincePlant pp : pps) {
+            String plantName = pp.getPlant();
+            List<Plant> plants = DataSupport.findAll(Plant.class);
+            for (Plant p : plants) {
+                if (plantName.equals(p.getName()) && p.getId() == plantId) {
+                    Seed seed = new Seed(plantName, R.drawable.ok);
+                    seedList.add(seed);
+                }
+            }
         }
     }
 }
