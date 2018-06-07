@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -34,9 +35,54 @@ public class FragmentSix extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //植物的不同成长阶段就加载不同的layout
         View view = inflater.inflate(R.layout.fragment_six, container, false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+        ImageView imageView = (ImageView) view.findViewById(R.id.image);//盆栽
         final LinearLayout tools = (LinearLayout) view.findViewById(R.id.outdoor_tools);
-
+        ImageView outdoorWatch = (ImageView) view.findViewById(R.id.outdoor_watch);//观察按钮
+        ImageView fertilizer = (ImageView) view.findViewById(R.id.outdoor_fertilizer);//施肥按钮
+        ImageView water = (ImageView) view.findViewById(R.id.outdoor_water);//浇水按钮
+        ImageView soil = (ImageView) view.findViewById(R.id.outdoor_soil);
+        ImageView pest = (ImageView) view.findViewById(R.id.outdoor_pest);
+        final FrameLayout board = (FrameLayout) view.findViewById(R.id.outdoor_board);//面板
+        final ImageView watchSoil = (ImageView) view.findViewById(R.id.outdoor_watch_soil);//观察面板的土壤
+        final ImageView watchLeaf = (ImageView) view.findViewById(R.id.outdoor_watch_leaf);//观察面板的叶子
+        outdoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.VISIBLE);
+                watchLeaf.setVisibility(View.VISIBLE);
+                watchSoil.setVisibility(View.VISIBLE);
+            }
+        });
+        fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.VISIBLE);
+            }
+        });
+        water.setOnClickListener(new View.OnClickListener() {//浇水按钮监听器
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.VISIBLE);
+            }
+        });
+        soil.setOnClickListener(new View.OnClickListener() {//松土按钮监听器
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.VISIBLE);
+            }
+        });
+        pest.setOnClickListener(new View.OnClickListener() {//除虫按钮监听器
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.VISIBLE);
+            }
+        });
+        watchLeaf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                watchLeaf.setVisibility(View.VISIBLE);
+            }
+        });
         //通过修改imageview的src来加载不同植物状态显示的图片
         boolean has = false;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);

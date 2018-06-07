@@ -145,4 +145,32 @@
             android:orientation="horizontal"></LinearLayout>
     </LinearLayout>
 
+    <FrameLayout
+        android:id="@+id/outdoor_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:background="@drawable/map_dialog">
+
+        <ImageView
+            android:id="@+id/outdoor_watch_soil"
+            android:visibility="gone"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/soil_watch" />
+
+        <ImageView
+            android:id="@+id/outdoor_watch_leaf"
+            android:visibility="gone"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center|right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/leaf" />
+
+    </FrameLayout>
+
 </FrameLayout>
