@@ -1,5 +1,6 @@
 package com.ecnu.myplant.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.ecnu.myplant.OutdoorsSeedActivity;
 import com.ecnu.myplant.R;
+import com.ecnu.myplant.SeedActivity;
 import com.ecnu.myplant.db.Plant;
 import com.ecnu.myplant.db.ProvincePlant;
 
@@ -30,13 +33,7 @@ public class FragmentSix extends Fragment {
         View view = inflater.inflate(R.layout.fragment_six, container, false);
         ImageView imageView = (ImageView) view.findViewById(R.id.image);
         final LinearLayout tools = (LinearLayout) view.findViewById(R.id.outdoor_tools);
-        //为image设置点击事件
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                tools.setVisibility(View.VISIBLE);
-            }
-        });
+
         //通过修改imageview的src来加载不同植物状态显示的图片
         List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
         boolean has = false;
@@ -52,10 +49,28 @@ public class FragmentSix extends Fragment {
                 }
             }
         }
-        if(has)
+        if(has){
             imageView.setImageResource(R.drawable.flower_pot);
-        /*else
-            imageView.setImageResource(R.drawable.flower_pot);*/
+            //为image设置点击事件
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    tools.setVisibility(View.VISIBLE);
+                }
+            });
+
+        }
+        else{
+            imageView.setImageResource(R.drawable.plus);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent1 = new Intent(getActivity(), OutdoorsSeedActivity.class);
+                    startActivity(intent1);
+                }
+            });
+
+        }
         return view;
     }
 }
