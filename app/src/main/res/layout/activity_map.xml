@@ -8,6 +8,7 @@
 
 
     <LinearLayout
+        android:id="@+id/hotview_layout"
         android:layout_width="match_parent"
         android:layout_height="540dp">
 
