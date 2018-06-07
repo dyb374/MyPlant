@@ -95,7 +95,7 @@ public class SeedActivity extends AppCompatActivity {
             List<Plant> plants = DataSupport.findAll(Plant.class);
             for(Plant p : plants){
                 if(plantName.equals(p.getName()) && p.getId() == plantId) {
-                    Seed seed = new Seed(plantName, R.drawable.ok);
+                    Seed seed = new Seed(plantName, R.drawable.flower_seed);
                     seedList.add(seed);
                 }
             }

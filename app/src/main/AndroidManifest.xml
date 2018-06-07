@@ -50,7 +50,8 @@
         <activity android:name=".WeatherActivity" />
         <activity android:name=".MapActivity" />
         <activity android:name=".SeedActivity" />
-        <activity android:name=".OutdoorsSeedActivity"/>
+        <activity android:name=".OutdoorsSeedActivity" />
+        <activity android:name=".AchieveActivity"/>
         <activity
             android:name=".IndoorSceneActivity"
             android:label="@string/title_activity_scene_one"
@@ -68,6 +69,7 @@
             android:name=".service.InitializeDatabase"
             android:enabled="true"
             android:exported="true" />
+
 
     </application>
 

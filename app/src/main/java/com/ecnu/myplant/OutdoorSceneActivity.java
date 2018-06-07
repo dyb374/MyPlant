@@ -136,7 +136,10 @@ public class OutdoorSceneActivity extends AppCompatActivity {
         imageAchievement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(OutdoorSceneActivity.this, AchieveActivity.class);
+                startActivity(intent);
                 hideFABMenu();
+                showFAB();
             }
         });
 

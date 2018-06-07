@@ -6,12 +6,12 @@
 
 
     <ImageView
-        android:id="@+id/seeds_image"
+        android:id="@+id/achieve_image"
         android:layout_width="80dp"
         android:layout_height="80dp" />
 
     <TextView
-        android:id="@+id/seeds_name"
+        android:id="@+id/achieve_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"

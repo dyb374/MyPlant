@@ -145,7 +145,10 @@ public class IndoorSceneActivity extends AppCompatActivity {
         imageAchievement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(IndoorSceneActivity.this, AchieveActivity.class);
+                startActivity(intent);
                 hideFABMenu();
+                showFAB();
             }
         });
 
