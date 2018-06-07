@@ -11,33 +11,29 @@
         android:id="@+id/linla0"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        android:gravity="right"
         android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/linla1"
             android:layout_width="match_parent"
-            android:layout_height="486dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:orientation="vertical">
-
 
             <ListView
                 android:id="@+id/list_viewex"
-                android:layout_width="474dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
 
         <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             android:id="@+id/linla2"
-            android:layout_width="383dp"
-            android:layout_height="99dp"
             android:layout_alignParentBottom="true"
-            android:gravity="right"
-            android:orientation="horizontal">
+            android:gravity="bottom|right"
+            android:orientation="vertical">
 
 
             <ImageView
