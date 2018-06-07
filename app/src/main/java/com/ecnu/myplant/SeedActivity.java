@@ -62,6 +62,11 @@ public class SeedActivity extends AppCompatActivity {
                 if(!has){
                     MyPlant mp = new MyPlant();
                     mp.setPlant(seed.getName());
+                    mp.setStateOfLife(1);
+                    mp.setLevel(50);
+                    mp.setWaterContent(50);
+                    mp.setSoilFertility(50);
+                    mp.setLeafCondition(50);
                     mp.save();
                     Toast.makeText(SeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SeedActivity.this, IndoorSceneActivity.class);

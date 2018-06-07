@@ -13,6 +13,8 @@ import org.litepal.crud.DataSupport;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Thread.sleep;
+
 public class FindPlant extends Service {
 
     private static final String TAG = "FindPlant";
@@ -27,10 +29,12 @@ public class FindPlant extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        onCount();
         String province = intent.getStringExtra("province");
         Log.d(TAG, "onStartCommand: "+province);
         List<Plant> plants = DataSupport.findAll(Plant.class);
         int plantId = (int) (Math.random() * plants.size() + 1);
+        plantId = 1;
         String plantName = null;
         for(Plant p : plants){
             if(p.getId() == plantId)
@@ -41,7 +45,6 @@ public class FindPlant extends Service {
         pp.setProvince(province);
         pp.setPlant(plantName);
         pp.save();
-        onCount();
         return super.onStartCommand(intent, flags, startId);
     }
 
