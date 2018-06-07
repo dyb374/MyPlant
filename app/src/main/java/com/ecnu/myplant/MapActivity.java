@@ -3,6 +3,7 @@ package com.ecnu.myplant;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
@@ -27,10 +29,10 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
     private LinearLayout bottom;
     private ImageView cancel;
     private MapDialogLayout dialogLayout;
-    ImageView dialog_cancel;
+    ImageView dialogCancel;
     ImageView ok;
-
-
+    TextView dialogText;
+    TextView bottomText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +43,17 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
     }
 
     private void initParam() {
+        Typeface typeface= Typeface.createFromAsset(getAssets(),"fonts/ddyy.ttf");
         mHotView = (HotClickView) findViewById(R.id.hotview);
         bottom = (LinearLayout) findViewById(R.id.map_bottom);
         cancel = (ImageView) findViewById(R.id.bottom_cancel_button);
         dialogLayout = (MapDialogLayout) findViewById(R.id.map_dialog);
-        dialog_cancel = (ImageView) findViewById(R.id.cancel_button);
+        dialogCancel = (ImageView) findViewById(R.id.cancel_button);
         ok = (ImageView) findViewById(R.id.ok_button);
+        dialogText = (TextView) findViewById(R.id.dialog_text);
+        dialogText.setTypeface(typeface);
+        bottomText = (TextView) findViewById(R.id.bottom_text);
+        bottomText.setTypeface(typeface);
 //        mHotView.setCanMove(false);
 //        mHotView.setCanScale(false);
     }
@@ -73,7 +80,8 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
     public void OnClick(View view, final HotArea hotArea) {
         String place = hotArea.getAreaId();
         dialogLayout.setVisibility(View.VISIBLE);
-        dialog_cancel.setOnClickListener(new View.OnClickListener() {
+        dialogText.setText("确认去" + hotArea.getAreaTitle() + "寻找植物?");
+        dialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialogLayout.setVisibility(View.GONE);
@@ -85,6 +93,7 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
             public void onClick(View view) {
                 dialogLayout.setVisibility(View.GONE);
                 bottom.setVisibility(View.VISIBLE);
+                bottomText.setText("取消去" + hotArea.getAreaTitle() + "的行程");
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
