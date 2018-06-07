@@ -49,6 +49,7 @@
 
         <activity android:name=".WeatherActivity" />
         <activity android:name=".MapActivity" />
+        <activity android:name=".SeedActivity"/>
         <activity
             android:name=".IndoorSceneActivity"
             android:label="@string/title_activity_scene_one"
@@ -57,6 +58,7 @@
             android:name=".OutdoorSceneActivity"
             android:label="@string/title_activity_outdoor_scene"
             android:theme="@style/AppTheme.NoActionBar" />
+
 
         <service
             android:name=".service.FindPlant"

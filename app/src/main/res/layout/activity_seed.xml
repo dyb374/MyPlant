@@ -7,14 +7,19 @@
     android:background="@drawable/bg3"
     tools:context="com.ecnu.myplant.SeedActivity">
 
+    <ListView
+        android:id="@+id/list_viewex"
+        android:layout_width="474dp"
+        android:layout_height="match_parent"></ListView>
 
     <LinearLayout
-        android:id="@+id/ll01"
+        android:id="@+id/linla"
         android:layout_width="383dp"
         android:layout_height="585dp"
         android:layout_alignParentBottom="true"
         android:gravity="right"
         android:orientation="horizontal">
+
 
 
         <ImageView
@@ -27,52 +32,6 @@
 
             />
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ll02"
-        android:layout_width="384dp"
-        android:layout_height="578dp"
-        android:layout_alignParentBottom="true"
-        android:gravity="right"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll021"
-
-            android:layout_width="match_parent"
-            android:layout_height="89dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
-            android:orientation="horizontal"></LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll022"
-
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
-            android:orientation="horizontal"></LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll023"
-
-            android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
-            android:orientation="horizontal"></LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll024"
-
-            android:layout_width="match_parent"
-            android:layout_height="101dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="right"
-            android:orientation="horizontal"></LinearLayout>
-        >
     </LinearLayout>
 
 

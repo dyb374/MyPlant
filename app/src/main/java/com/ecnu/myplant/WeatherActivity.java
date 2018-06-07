@@ -40,7 +40,7 @@ public class WeatherActivity extends AppCompatActivity {
 
     private TextView degreeText;
 
-    private TextView weatherInfoText;
+    //private TextView weatherInfoText;
 
     private LinearLayout forecastLayout;
 
@@ -62,7 +62,7 @@ public class WeatherActivity extends AppCompatActivity {
         titleCity = (TextView) findViewById(R.id.title_city);
         titleUpdateTime = (TextView) findViewById(R.id.title_update_time);
         degreeText = (TextView) findViewById(R.id.degree_text);
-        weatherInfoText = (TextView) findViewById(R.id.weather_info_text);
+        //weatherInfoText = (TextView) findViewById(R.id.weather_info_text);
         forecastLayout = (LinearLayout) findViewById(R.id.forecast_layout);
         aqiText = (TextView) findViewById(R.id.aqi_text);
         pm25Text = (TextView) findViewById(R.id.pm25_text);
@@ -74,7 +74,7 @@ public class WeatherActivity extends AppCompatActivity {
                 + "湿度：" + weather.humidity + "\n"
                 + "时间：" + weather.time + "\n"
                 + "紫外线：" + weather.uv_index;                                 //API的干燥度都为空
-        weatherInfoText.setText(info);
+        //weatherInfoText.setText(info);
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
