@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -14,6 +15,7 @@ import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
 import com.ecnu.myplant.db.Plant;
 import com.ecnu.myplant.db.ProvincePlant;
+import com.ecnu.myplant.service.ViewAnimation;
 
 import org.litepal.crud.DataSupport;
 
@@ -54,6 +56,8 @@ public class FragmentFive extends Fragment {
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    TranslateAnimation animation = ViewAnimation.enterAnimation("left");
+                    tools.startAnimation(animation);
                     tools.setVisibility(View.VISIBLE);
                 }
             });

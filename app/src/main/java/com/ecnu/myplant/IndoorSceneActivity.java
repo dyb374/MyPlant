@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -35,6 +36,7 @@ import com.ecnu.myplant.fragments.FragmentOne;
 import com.ecnu.myplant.fragments.FragmentSix;
 import com.ecnu.myplant.fragments.FragmentThree;
 import com.ecnu.myplant.fragments.FragmentTwo;
+import com.ecnu.myplant.service.ViewAnimation;
 
 import org.litepal.crud.DataSupport;
 
@@ -101,6 +103,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
                     addBillTranslate3.setStartDelay(200);
                     addBillTranslate3.start();
                 }
+
                 hideFAB();
                 /*
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_INDEFINITE)
@@ -232,8 +235,7 @@ public class IndoorSceneActivity extends AppCompatActivity {
         image.setVisibility(View.GONE);
     }
 
-    private void showFAB(){
-        image.setVisibility(View.VISIBLE);
+    private void showFAB(){image.setVisibility(View.VISIBLE);
     }
 
     //实例化控件

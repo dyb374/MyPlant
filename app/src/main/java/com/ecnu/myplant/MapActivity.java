@@ -9,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import com.dreamlive.hotimglibrary.utils.FileUtils;
 import com.dreamlive.hotimglibrary.view.HotClickView;
 import com.ecnu.myplant.layout.MapDialogLayout;
 import com.ecnu.myplant.service.FindPlant;
+import com.ecnu.myplant.service.ViewAnimation;
 
 public class MapActivity extends AppCompatActivity implements HotClickView.OnClickListener{
 
@@ -92,11 +95,15 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
             @Override
             public void onClick(View view) {
                 dialogLayout.setVisibility(View.GONE);
+                TranslateAnimation animation = ViewAnimation.enterAnimation("up");
+                bottom.startAnimation(animation);
                 bottom.setVisibility(View.VISIBLE);
                 bottomText.setText("取消去" + hotArea.getAreaTitle() + "的行程");
                 cancel.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        TranslateAnimation animation = ViewAnimation.hideAnimation("down");
+                        bottom.startAnimation(animation);
                         bottom.setVisibility(View.GONE);
                         //停止服务
                         Intent intent = new Intent(MapActivity.this, FindPlant.class);
@@ -116,4 +123,6 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
         setResult(RESULT_OK, intent);
         super.onDestroy();
     }
+
+
 }
