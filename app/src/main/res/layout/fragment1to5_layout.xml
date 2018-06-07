@@ -64,8 +64,8 @@
 
             <ImageView
                 android:id="@+id/indoor_water"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/outdoor_water" />
         </LinearLayout>
@@ -79,8 +79,8 @@
 
             <ImageView
                 android:id="@+id/indoor_fertilizer"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/fertilizer" />
         </LinearLayout>
@@ -94,8 +94,8 @@
 
             <ImageView
                 android:id="@+id/indoor_watch"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_marginRight="10dp"
                 android:src="@drawable/watch" />
         </LinearLayout>

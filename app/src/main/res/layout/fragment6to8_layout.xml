@@ -63,10 +63,10 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginRight="10dp"
                 android:id="@+id/outdoor_water"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/outdoor_water" />
         </LinearLayout>
 
@@ -78,10 +78,10 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginRight="10dp"
                 android:id="@+id/outdoor_fertilizer"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/fertilizer" />
         </LinearLayout>
 
@@ -93,10 +93,10 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginRight="10dp"
                 android:id="@+id/outdoor_watch"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/watch" />
         </LinearLayout>
 
@@ -108,10 +108,10 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginRight="10dp"
                 android:id="@+id/outdoor_pest"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/pest" />
         </LinearLayout>
 
@@ -123,10 +123,10 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_marginRight="10dp"
                 android:id="@+id/outdoor_soil"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/soil" />
         </LinearLayout>
 
