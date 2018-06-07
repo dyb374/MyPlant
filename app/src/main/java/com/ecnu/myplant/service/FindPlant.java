@@ -18,6 +18,7 @@ import static java.lang.Thread.sleep;
 public class FindPlant extends Service {
 
     private static final String TAG = "FindPlant";
+    private String province = null;
 
     public FindPlant() {
     }
@@ -30,21 +31,30 @@ public class FindPlant extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         onCount();
-        String province = intent.getStringExtra("province");
-        Log.d(TAG, "onStartCommand: "+province);
-        List<Plant> plants = DataSupport.findAll(Plant.class);
-        int plantId = (int) (Math.random() * plants.size() + 1);
-        plantId = 1;
-        String plantName = null;
-        for(Plant p : plants){
-            if(p.getId() == plantId)
-                plantName = p.getName();
+        province = intent.getStringExtra("province");
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(600000);        //延迟10分钟找到植物
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Log.d(TAG, "onStartCommand: "+province);
+                List<Plant> plants = DataSupport.findAll(Plant.class);
+                int plantId = (int) (Math.random() * plants.size() + 1);
+                String plantName = null;
+                for(Plant p : plants){
+                    if(p.getId() == plantId)
+                        plantName = p.getName();
 
-        }
-        ProvincePlant pp = new ProvincePlant();
-        pp.setProvince(province);
-        pp.setPlant(plantName);
-        pp.save();
+                }
+                ProvincePlant pp = new ProvincePlant();
+                pp.setProvince(province);
+                pp.setPlant(plantName);
+                pp.save();
+            }
+        }).start();
         return super.onStartCommand(intent, flags, startId);
     }
 
