@@ -90,7 +90,9 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
                     public void onClick(View view) {
                         bottom.setVisibility(View.GONE);
                         //停止服务
-                    }
+                        Intent intent = new Intent(MapActivity.this, FindPlant.class);
+                        stopService(intent);
+                }
                 });
                 Intent intent = new Intent(MapActivity.this, FindPlant.class);
                 intent.putExtra("province", hotArea.getAreaTitle());
