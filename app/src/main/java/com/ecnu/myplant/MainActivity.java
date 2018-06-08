@@ -42,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView positionText;
 
+    private LongTouchBtn Btn1;
+    private int num=0;
+    private TextView Tv1;
+
     public BDAbstractLocationListener myListener = new MyLocationListener();
 
     public LocationClientOption option = new LocationClientOption();
@@ -91,6 +95,45 @@ public class MainActivity extends AppCompatActivity {
             主界面测试
              */
             Button button2 = (Button) findViewById(R.id.button_2);
+            Tv1 = (TextView)findViewById(R.id.tv1);
+            Btn1 = (LongTouchBtn)findViewById(R.id.btn2);
+
+
+            Btn1.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    Log.i("test", "自定义按钮处理单击");
+
+                }
+            });
+            Btn1.setOnLongClickListener(new View.OnLongClickListener() {
+
+                @Override
+                public boolean onLongClick(View v) {
+                    Log.i("test", "自定义按钮处理长按一次相应");
+                    return false;
+                }
+            });
+
+            /**
+             * 这是一个自定义的接口 专门负责处理长按逻辑
+             *   @param listener
+             *            监听器。
+             * @param time
+             *            第2个参数传入1000 ,表示1秒处理一次onLongTouch()方法
+             */
+            Btn1.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {
+
+                @Override
+                public void onLongTouch() {
+                    num++;
+                    Tv1.setText(num+"");
+                    Log.i("test", "正在长按");
+
+                }
+            },1000);
+
             button2.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
