@@ -20,6 +20,7 @@ import com.ecnu.myplant.db.MyPlant;
 import com.ecnu.myplant.db.Plant;
 import com.ecnu.myplant.db.ProvincePlant;
 import com.ecnu.myplant.service.ViewAnimation;
+import com.ecnu.myplant.LongTouchBtn;
 
 import org.litepal.crud.DataSupport;
 
@@ -31,6 +32,8 @@ import java.util.List;
  */
 
 public class FragmentOne extends Fragment {
+    int num = 0;
+    int flag = 0;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class FragmentOne extends Fragment {
         final ImageView waterCancel = (ImageView) view.findViewById(R.id.indoor_water_cancel);//浇水面板取消键
         final ImageView fertilizerCancel = (ImageView) view.findViewById(R.id.indoor_fertilizer_cancel); //施肥面板取消键
         final ImageView watchOk = (ImageView) view.findViewById(R.id.indoor_watch_ok);//观察面板确认键
+        final LongTouchBtn progressBar = (LongTouchBtn) view.findViewById(R.id.progress_bar);;//进度条控件
+
+
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
             public void onClick(View view) {
@@ -122,6 +128,57 @@ public class FragmentOne extends Fragment {
                 fertilizerOk.setVisibility(View.GONE);
             }
         });
+
+
+        progressBar.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                //Log.i("test", "自定义按钮处理单击");
+
+            }
+        });
+        progressBar.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                //Log.i("test", "自定义按钮处理长按一次相应");
+                return false;
+            }
+        });
+
+        /**
+         * 这是一个自定义的接口 专门负责处理长按逻辑
+         *   @param listener
+         *            监听器。
+         * @param time
+         *            第2个参数传入1000 ,表示1秒处理一次onLongTouch()方法
+         */
+
+        progressBar.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {
+
+            @Override
+            public void onLongTouch() {
+
+                if(flag == 0) {
+                    num = num + 5;
+                    progressBar.setProgress(num);
+
+                }
+                else if(flag == 1) {
+                    num = num - 5;
+                    progressBar.setProgress(num);
+                }
+                if(num == 100) {
+                    flag = 1;
+                }
+                if(num == 0) {
+                    flag = 0;
+                }
+
+            }
+        },100);
+
 
         //通过修改imageview的src来加载不同植物状态显示的图片
 

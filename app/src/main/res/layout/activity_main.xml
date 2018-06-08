@@ -28,16 +28,4 @@
         android:layout_height="wrap_content"
         android:text="主界面测试"/>
 
-    <com.ecnu.myplant.LongTouchBtn
-        android:id="@+id/btn2"
-        android:layout_width="226dp"
-        android:layout_height="76dp"
-        android:text="自定义Btn测试" />
-    <TextView
-        android:id="@+id/tv1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        />
-
 </LinearLayout>

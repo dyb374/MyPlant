@@ -6,13 +6,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 /**
  * Created by Type1551 on 2018/6/8.
  */
-public class LongTouchBtn extends Button {
+
+public class LongTouchBtn extends ProgressBar {
 
     /**
      * 记录当前自定义Btn是否按下
@@ -49,12 +51,12 @@ public class LongTouchBtn extends Button {
             clickdown = true;
             new LongTouchTask().execute();
 
-            Log.i("huahua", "按下");
+            //Log.i("huahua", "按下");
         }
         else if(event.getAction() == MotionEvent.ACTION_UP)
         {
             clickdown = false;
-            Log.i("huahua", "弹起");
+            //Log.i("huahua", "弹起");
         }
         return super.onTouchEvent(event);
     }

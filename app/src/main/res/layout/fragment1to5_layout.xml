@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:id="@+id/indoor_screen"
-    >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,10 +48,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="10dp"
         android:id="@+id/indoor_tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:visibility="gone">
 
@@ -136,15 +135,23 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/map_dialog"
-        android:visibility="gone">
+        android:visibility="visible">
+
+        <com.ecnu.myplant.LongTouchBtn
+            android:id="@+id/progress_bar"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="281dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="101" />
 
         <ImageView
             android:id="@+id/watch_soil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
-            android:layout_marginLeft="30dp"
             android:layout_marginBottom="10dp"
+            android:layout_marginLeft="30dp"
             android:src="@drawable/soil_watch"
             android:visibility="gone" />
 
@@ -165,7 +172,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@drawable/ok"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/indoor_water_ok"
@@ -173,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@drawable/ok"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/indoor_fertilizer_ok"
@@ -181,7 +188,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:src="@drawable/ok"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/indoor_water_cancel"
@@ -190,7 +197,7 @@
             android:layout_gravity="bottom|center"
             android:layout_marginLeft="50dp"
             android:src="@drawable/cancel"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/indoor_fertilizer_cancel"
@@ -199,7 +206,7 @@
             android:layout_gravity="bottom|center"
             android:layout_marginLeft="50dp"
             android:src="@drawable/cancel"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </FrameLayout>
 
 </FrameLayout>
