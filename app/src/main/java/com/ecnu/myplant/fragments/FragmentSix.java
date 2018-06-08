@@ -43,47 +43,141 @@ public class FragmentSix extends Fragment {
         ImageView outdoorWatch = (ImageView) view.findViewById(R.id.outdoor_watch);//观察按钮
         ImageView fertilizer = (ImageView) view.findViewById(R.id.outdoor_fertilizer);//施肥按钮
         ImageView water = (ImageView) view.findViewById(R.id.outdoor_water);//浇水按钮
-        ImageView soil = (ImageView) view.findViewById(R.id.outdoor_soil);
-        ImageView pest = (ImageView) view.findViewById(R.id.outdoor_pest);
+        ImageView soil = (ImageView) view.findViewById(R.id.outdoor_soil);//松土按钮
+        ImageView pest = (ImageView) view.findViewById(R.id.outdoor_pest);//施肥按钮
         final FrameLayout board = (FrameLayout) view.findViewById(R.id.outdoor_board);//面板
         final ImageView watchSoil = (ImageView) view.findViewById(R.id.outdoor_watch_soil);//观察面板的土壤
         final ImageView watchLeaf = (ImageView) view.findViewById(R.id.outdoor_watch_leaf);//观察面板的叶子
+        final ImageView watchOk = (ImageView) view.findViewById(R.id.outdoor_watch_ok);//确认观察
+        final ImageView waterOk = (ImageView) view.findViewById(R.id.outdoor_water_ok);//确认浇水
+        final ImageView waterCancel = (ImageView) view.findViewById(R.id.outdoor_water_cancel);//取消浇水
+        final ImageView soilOk = (ImageView) view.findViewById(R.id.outdoor_soil_ok);//确认松土
+        final ImageView soilCancel = (ImageView) view.findViewById(R.id.outdoor_soil_cancel);//取消松土
+        final ImageView pestOk = (ImageView) view.findViewById(R.id.outdoor_pest_ok);//确认除虫
+        final ImageView peatCancel = (ImageView) view.findViewById(R.id.outdoor_pest_cancel);//取消除虫
+        final ImageView fertilizerOk = (ImageView) view.findViewById(R.id.outdoor_fertilizer_ok);//确认施肥
+        final ImageView fertilizerCancel = (ImageView) view.findViewById(R.id.outdoor_fertilizer_cancel);//取消施肥
         outdoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
+                watchOk.setVisibility(View.VISIBLE);
             }
         });
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
+                fertilizerOk.setVisibility(View.VISIBLE);
+                fertilizerCancel.setVisibility(View.VISIBLE);
             }
         });
         water.setOnClickListener(new View.OnClickListener() {//浇水按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
+                waterOk.setVisibility(View.VISIBLE);
+                waterCancel.setVisibility(View.VISIBLE);
             }
         });
         soil.setOnClickListener(new View.OnClickListener() {//松土按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
+                soilOk.setVisibility(View.VISIBLE);
+                soilCancel.setVisibility(View.VISIBLE);
             }
         });
         pest.setOnClickListener(new View.OnClickListener() {//除虫按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
+                pestOk.setVisibility(View.VISIBLE);
+                peatCancel.setVisibility(View.VISIBLE);
             }
         });
-        watchLeaf.setOnClickListener(new View.OnClickListener() {
+
+        watchOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                watchLeaf.setVisibility(View.VISIBLE);
+                board.setVisibility(View.GONE);
+                watchOk.setVisibility(View.GONE);
+                watchLeaf.setVisibility(View.GONE);
+                watchSoil.setVisibility(View.GONE);
+            }
+        });
+
+        waterOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                waterCancel.setVisibility(View.GONE);
+                waterOk.setVisibility(View.GONE);
+            }
+        });
+
+        waterCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                waterCancel.setVisibility(View.GONE);
+                waterOk.setVisibility(View.GONE);
+            }
+        });
+
+        soilOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                soilCancel.setVisibility(View.GONE);
+                soilOk.setVisibility(View.GONE);
+            }
+        });
+
+        soilCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                soilCancel.setVisibility(View.GONE);
+                soilOk.setVisibility(View.GONE);
+            }
+        });
+
+        fertilizerOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                fertilizerCancel.setVisibility(View.GONE);
+                fertilizerOk.setVisibility(View.GONE);
+            }
+        });
+
+        fertilizerCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                fertilizerCancel.setVisibility(View.GONE);
+                fertilizerOk.setVisibility(View.GONE);
+            }
+        });
+
+        pestOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                peatCancel.setVisibility(View.GONE);
+                pestOk.setVisibility(View.GONE);
+            }
+        });
+
+        peatCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                peatCancel.setVisibility(View.GONE);
+                pestOk.setVisibility(View.GONE);
             }
         });
         //通过修改imageview的src来加载不同植物状态显示的图片

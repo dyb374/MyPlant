@@ -40,35 +40,86 @@ public class FragmentOne extends Fragment {
         final LinearLayout tools = (LinearLayout) view.findViewById(R.id.indoor_tools);
         ImageView indoorWatch = (ImageView) view.findViewById(R.id.indoor_watch);//观察按钮
         ImageView fertilizer = (ImageView) view.findViewById(R.id.indoor_fertilizer);//施肥按钮
-        ImageView water = (ImageView) view.findViewById(R.id.indoor_water);//浇水按钮
+        final ImageView water = (ImageView) view.findViewById(R.id.indoor_water);//浇水按钮
         final FrameLayout board = (FrameLayout) view.findViewById(R.id.board);//面板
         final ImageView watchSoil = (ImageView) view.findViewById(R.id.watch_soil);//观察面板的土壤
         final ImageView watchLeaf = (ImageView) view.findViewById(R.id.watch_leaf);//观察面板的叶子
+        final ImageView waterOk = (ImageView) view.findViewById(R.id.indoor_water_ok);//浇水面板确认键
+        final ImageView fertilizerOk = (ImageView) view.findViewById(R.id.indoor_fertilizer_ok);//施肥面板确认键
+        final ImageView waterCancel = (ImageView) view.findViewById(R.id.indoor_water_cancel);//浇水面板取消键
+        final ImageView fertilizerCancel = (ImageView) view.findViewById(R.id.indoor_fertilizer_cancel); //施肥面板取消键
+        final ImageView watchOk = (ImageView) view.findViewById(R.id.indoor_watch_ok);//观察面板确认键
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
+                watchOk.setVisibility(View.VISIBLE);
             }
         });
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
+                fertilizerCancel.setVisibility(View.VISIBLE);
+                fertilizerOk.setVisibility(View.VISIBLE);
             }
         });
         water.setOnClickListener(new View.OnClickListener() {//浇水按钮监听器
             @Override
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
+                waterCancel.setVisibility(View.VISIBLE);
+                watchOk.setVisibility(View.VISIBLE);
             }
         });
 
-        watchLeaf.setOnClickListener(new View.OnClickListener() {
+        watchOk.setOnClickListener(new View.OnClickListener() {//观察面板确认键
             @Override
             public void onClick(View view) {
-                watchLeaf.setVisibility(View.VISIBLE);
+                board.setVisibility(View.GONE);
+                watchOk.setVisibility(View.GONE);
+                watchLeaf.setVisibility(View.GONE);
+                watchSoil.setVisibility(View.GONE);
+            }
+        });
+
+        waterOk.setOnClickListener(new View.OnClickListener() {//浇水面板确认键
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                waterCancel.setVisibility(View.GONE);
+                watchOk.setVisibility(View.GONE);
+                //数据库更新操作
+            }
+        });
+
+        waterCancel.setOnClickListener(new View.OnClickListener() {//浇水面板取消键
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                waterCancel.setVisibility(View.GONE);
+                watchOk.setVisibility(View.GONE);
+            }
+        });
+
+        fertilizerOk.setOnClickListener(new View.OnClickListener() {//施肥面板确认键
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                fertilizerCancel.setVisibility(View.GONE);
+                fertilizerOk.setVisibility(View.GONE);
+                //数据库更新操作
+            }
+        });
+
+        fertilizerCancel.setOnClickListener(new View.OnClickListener() {//施肥面板取消键
+            @Override
+            public void onClick(View view) {
+                board.setVisibility(View.GONE);
+                fertilizerCancel.setVisibility(View.GONE);
+                fertilizerOk.setVisibility(View.GONE);
             }
         });
 

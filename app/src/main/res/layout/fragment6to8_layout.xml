@@ -150,27 +150,104 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:visibility="gone"
-        android:background="@drawable/map_dialog">
+        android:background="@drawable/map_dialog"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/outdoor_watch_soil"
-            android:visibility="gone"
-            android:layout_gravity="center|left"
-            android:layout_marginLeft="30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/soil_watch" />
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/soil_watch"
+            android:visibility="gone" />
 
         <ImageView
             android:id="@+id/outdoor_watch_leaf"
-            android:visibility="gone"
-            android:layout_marginRight="30dp"
-            android:layout_gravity="center|right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/leaf" />
+            android:layout_gravity="center|right"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/leaf"
+            android:visibility="gone" />
 
+        <ImageView
+            android:id="@+id/outdoor_watch_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_pest_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_fertilizer_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_soil_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_water_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_water_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/cancel"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_soil_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/cancel"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_pest_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/cancel"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/outdoor_fertilizer_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/cancel"
+            android:visibility="gone" />
     </FrameLayout>
 
 </FrameLayout>
