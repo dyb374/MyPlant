@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,16 +73,19 @@ public class FragmentFive extends Fragment {
 
         //通过修改imageview的src来加载不同植物状态显示的图片
         boolean has = false;
+        int count = 0;
+        String plantNmae = null;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+        List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
-            if(has == true)
-                break;
-            String plantName = mp.getPlant();
-            List<Plant> plants = DataSupport.findAll(Plant.class);
-            for(Plant p : plants){
-                if(plantName.equals(p.getName()) && p.getId() == 5) {
-                    has = true;
-                    break;
+            for(Plant p : ps) {
+                if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
+                    count++;
+                    if (count == 5){
+                        has = true;
+                        plantNmae = mp.getPlant();
+                        break;
+                    }
                 }
             }
         }
@@ -104,7 +108,6 @@ public class FragmentFive extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), SeedActivity.class);
-                    intent1.putExtra("plantId", 5);
                     startActivity(intent1);
                 }
             });

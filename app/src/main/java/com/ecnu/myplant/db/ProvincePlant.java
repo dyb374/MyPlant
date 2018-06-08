@@ -23,6 +23,15 @@ public class ProvincePlant extends DataSupport{
         this.plant = plant;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private String province;
     private String plant;
 

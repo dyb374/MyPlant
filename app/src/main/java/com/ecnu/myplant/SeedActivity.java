@@ -40,9 +40,7 @@ public class SeedActivity extends AppCompatActivity {
         linlar0  = (LinearLayout) findViewById(R.id.linla0);
         linlar1  = (LinearLayout) findViewById(R.id.linla1);
         linlar2  = (LinearLayout) findViewById(R.id.linla2);
-        Intent intent = getIntent();
-        int plantId = intent.getIntExtra("plantId", -1);
-        initSeeds(plantId); // 初始化seed数据
+        initSeeds(); // 初始化seed数据
         SeedAdapter adapter = new SeedAdapter(SeedActivity.this, R.layout.seed_item, seedList);
         ListView listView = (ListView) findViewById(R.id.list_viewex);
         listView.setAdapter(adapter);
@@ -53,25 +51,25 @@ public class SeedActivity extends AppCompatActivity {
                 com.ecnu.myplant.Seed seed = seedList.get(position);
                 boolean has = false;
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-                for(MyPlant mp : mps) {
-                    if (mp.getPlant().equals(seed.getName())) {
-                        has = true;
-                        Toast.makeText(SeedActivity.this, "你已领养了植物:" + seed.getName() + "！", Toast.LENGTH_SHORT).show();
+                MyPlant mp = new MyPlant();
+                mp.setPlant(seed.getName());
+                mp.setStateOfLife(1);
+                mp.setLevel(50);
+                mp.setWaterContent(50);
+                mp.setSoilFertility(50);
+                mp.setLeafCondition(50);
+                mp.save();
+                Toast.makeText(SeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
+                List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
+                int deleteId = 0;
+                for(ProvincePlant pp : pps) {
+                    if(pp.getPlant().equals(seed.getName())){
+                        deleteId = pp.getId();
                     }
                 }
-                if(!has){
-                    MyPlant mp = new MyPlant();
-                    mp.setPlant(seed.getName());
-                    mp.setStateOfLife(1);
-                    mp.setLevel(50);
-                    mp.setWaterContent(50);
-                    mp.setSoilFertility(50);
-                    mp.setLeafCondition(50);
-                    mp.save();
-                    Toast.makeText(SeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SeedActivity.this, IndoorSceneActivity.class);
-                    startActivity(intent);
-                }
+                DataSupport.delete(ProvincePlant.class, deleteId);
+                Intent intent = new Intent(SeedActivity.this, IndoorSceneActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -88,13 +86,13 @@ public class SeedActivity extends AppCompatActivity {
     }
 
 
-    private void initSeeds(int plantId) {
+    private void initSeeds() {
         List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
         for(ProvincePlant pp : pps) {
             String plantName = pp.getPlant();
             List<Plant> plants = DataSupport.findAll(Plant.class);
             for(Plant p : plants){
-                if(plantName.equals(p.getName()) && p.getId() == plantId) {
+                if(plantName.equals(p.getName()) && p.getId() >= 1 && p.getId() <= 5) {
                     Seed seed = new Seed(plantName, R.drawable.flower_seed);
                     seedList.add(seed);
                 }

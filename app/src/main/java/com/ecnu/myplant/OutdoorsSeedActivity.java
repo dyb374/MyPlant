@@ -38,9 +38,7 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
         linlar0 = (LinearLayout) findViewById(R.id.linla0);
         linlar1 = (LinearLayout) findViewById(R.id.linla1);
         linlar2 = (LinearLayout) findViewById(R.id.linla2);
-        Intent intent = getIntent();
-        int plantId = intent.getIntExtra("plantId", -1);
-        initSeeds(plantId); // 初始化seed数据
+        initSeeds(); // 初始化seed数据
         SeedAdapter adapter = new SeedAdapter(OutdoorsSeedActivity.this, R.layout.seed_item, seedList);
         ListView listView = (ListView) findViewById(R.id.list_viewex);
         listView.setAdapter(adapter);
@@ -62,6 +60,14 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
                     mp.setPlant(seed.getName());
                     mp.save();
                     Toast.makeText(OutdoorsSeedActivity.this, "成功领养植物：" + seed.getName() + "！", Toast.LENGTH_SHORT).show();
+                    List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
+                    int deleteId = 0;
+                    for(ProvincePlant pp : pps) {
+                        if(pp.getPlant().equals(seed.getName())){
+                            deleteId = pp.getId();
+                        }
+                    }
+                    DataSupport.delete(ProvincePlant.class, deleteId);
                     Intent intent = new Intent(OutdoorsSeedActivity.this, OutdoorSceneActivity.class);
                     startActivity(intent);
                 }
@@ -80,14 +86,14 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
     }
 
 
-    private void initSeeds(int plantId) {
+    private void initSeeds() {
         List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
         for (ProvincePlant pp : pps) {
             String plantName = pp.getPlant();
             List<Plant> plants = DataSupport.findAll(Plant.class);
             for (Plant p : plants) {
-                if (plantName.equals(p.getName()) && p.getId() == plantId) {
-                    Seed seed = new Seed(plantName, R.drawable.tree_seed);
+                if (plantName.equals(p.getName()) && p.getId() >= 6 && p.getId() <= 8) {
+                    Seed seed = new Seed(plantName, R.drawable.ok);
                     seedList.add(seed);
                 }
             }

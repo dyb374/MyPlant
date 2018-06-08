@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,8 @@ import com.ecnu.myplant.service.ViewAnimation;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Andrew Dong on 2018/4/19.
@@ -85,16 +88,19 @@ public class FragmentSix extends Fragment {
         });
         //通过修改imageview的src来加载不同植物状态显示的图片
         boolean has = false;
+        int count = 0;
+        String plantNmae = null;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+        List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
-            if(has == true)
-                break;
-            String plantName = mp.getPlant();
-            List<Plant> plants = DataSupport.findAll(Plant.class);
-            for(Plant p : plants){
-                if(plantName.equals(p.getName()) && p.getId() == 6) {
-                    has = true;
-                    break;
+            for(Plant p : ps) {
+                if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                    count++;
+                    if (count == 1){
+                        has = true;
+                        plantNmae = mp.getPlant();
+                        break;
+                    }
                 }
             }
         }
@@ -117,7 +123,6 @@ public class FragmentSix extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), OutdoorsSeedActivity.class);
-                    intent1.putExtra("plantId", 6);
                     startActivity(intent1);
                 }
             });

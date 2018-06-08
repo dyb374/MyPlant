@@ -35,11 +35,11 @@ public class FindPlant extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(600000);        //延迟10分钟找到植物
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    Thread.sleep(600000);        //延迟10分钟找到植物
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
                 Log.d(TAG, "onStartCommand: "+province);
                 List<Plant> plants = DataSupport.findAll(Plant.class);
                 int plantId = (int) (Math.random() * plants.size() + 1);
