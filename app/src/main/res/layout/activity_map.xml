@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="@drawable/bg1">
 
-
     <LinearLayout
         android:id="@+id/hotview_layout"
         android:layout_width="match_parent"
@@ -15,9 +14,16 @@
         <com.dreamlive.hotimglibrary.view.HotClickView
             android:id="@+id/hotview"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.dreamlive.hotimglibrary.view.HotClickView>
+        android:layout_height="match_parent"></com.dreamlive.hotimglibrary.view.HotClickView>
 
     </LinearLayout>
+    <ImageView
+        android:id="@+id/map_back"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="start|top"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/back_button" />
 
     <LinearLayout
         android:id="@+id/map_bottom"

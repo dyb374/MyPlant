@@ -34,7 +34,9 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="3X0KPtpepoDIkIkeTpPbGkuEas0LYS5c" />
 
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,17 +49,24 @@
             android:enabled="true"
             android:process=":remote" />
 
-        <activity android:name=".WeatherActivity" />
-        <activity android:name=".MapActivity" />
-        <activity android:name=".SeedActivity" />
-        <activity android:name=".OutdoorsSeedActivity" />
-        <activity android:name=".AchieveActivity"/>
+        <activity android:name=".WeatherActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".MapActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".SeedActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".OutdoorsSeedActivity"
+            android:launchMode="singleTask"/>
+        <activity android:name=".AchieveActivity"
+            android:launchMode="singleTask"/>
         <activity
             android:name=".IndoorSceneActivity"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_scene_one"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OutdoorSceneActivity"
+            android:launchMode="singleTask"
             android:label="@string/title_activity_outdoor_scene"
             android:theme="@style/AppTheme.NoActionBar" />
 

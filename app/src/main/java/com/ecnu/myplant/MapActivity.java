@@ -8,6 +8,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
@@ -36,13 +37,21 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
     ImageView ok;
     TextView dialogText;
     TextView bottomText;
-
+    ImageView mapBack;
+    private static final String TAG = "MapActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         initParam();
         initDatas();
+        Log.d(TAG, "onCreate: !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        mapBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     private void initParam() {
@@ -57,6 +66,7 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
         dialogText.setTypeface(typeface);
         bottomText = (TextView) findViewById(R.id.bottom_text);
         bottomText.setTypeface(typeface);
+        mapBack = (ImageView) findViewById(R.id.map_back);
 //        mHotView.setCanMove(false);
 //        mHotView.setCanScale(false);
     }
