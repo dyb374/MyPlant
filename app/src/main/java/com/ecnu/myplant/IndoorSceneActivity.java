@@ -138,8 +138,8 @@ public class IndoorSceneActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(IndoorSceneActivity.this, WeatherActivity.class);
                 startActivity(intent);
-                 hideFABMenu();
-                 showFAB();
+                hideFABMenu();
+                showFAB();
             }
         });
         imageAchievement.setOnClickListener(new View.OnClickListener() {

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,73 +40,61 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     public LocationClient mLocationClient = null;
-
     private TextView positionText;
-
-
     public BDAbstractLocationListener myListener = new MyLocationListener();
-
     public LocationClientOption option = new LocationClientOption();
-
-    private static boolean flag = false;
-
     public static String city;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*
         用户第一次使用时初始化数据库
          */
 
-        if (!flag){
-            super.onCreate(savedInstanceState);
-            mLocationClient = new LocationClient(getApplicationContext());
-            option.setIsNeedAddress(true);
-            mLocationClient.setLocOption(option);
-            mLocationClient.registerLocationListener( myListener );
-            setContentView(R.layout.activity_main);
-            positionText = (TextView) findViewById(R.id.position_text_view);
-            List<String> permissionList = new ArrayList<>();
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
-            }
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.READ_PHONE_STATE);
-            }
-            if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            }
-            if (!permissionList.isEmpty()) {
-                String[] permissions = permissionList.toArray(new String[permissionList.size()]);
-                ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
-            } else {
-                requestLocation();
-            }
-
-            LitePal.getDatabase();
-            List<Plant> plants = DataSupport.findAll(Plant.class);
-            if(plants.size() == 0) {
-                Intent intent = new Intent(MainActivity.this, InitializeDatabase.class);
-                startService(intent);
-            }
-            //positionText.setTypeface(Typeface.createFromAsset(context.getAssets(), "fonts/ddyy.ttf"));
-            /*
-            主界面测试
-             */
-            Button button2 = (Button) findViewById(R.id.button_2);
-            button2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent1 = new Intent(MainActivity.this, IndoorSceneActivity.class);
-                    startActivity(intent1);
-                }
-            });
-            flag = true;
-
-
-        } else {
-
-            //intent到另一个活动
+        super.onCreate(savedInstanceState);
+        mLocationClient = new LocationClient(getApplicationContext());
+        option.setIsNeedAddress(true);
+        mLocationClient.setLocOption(option);
+        mLocationClient.registerLocationListener( myListener );
+        setContentView(R.layout.activity_main);
+        positionText = (TextView) findViewById(R.id.position_text_view);
+        List<String> permissionList = new ArrayList<>();
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.ACCESS_FINE_LOCATION);
         }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_PHONE_STATE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.READ_PHONE_STATE);
+        }
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            permissionList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!permissionList.isEmpty()) {
+            String[] permissions = permissionList.toArray(new String[permissionList.size()]);
+            ActivityCompat.requestPermissions(MainActivity.this, permissions, 1);
+        } else {
+            requestLocation();
+        }
+
+        //数据库初始化
+        LitePal.getDatabase();
+        List<Plant> plants = DataSupport.findAll(Plant.class);
+        if(plants.size() == 0) {
+            Intent intent = new Intent(MainActivity.this, InitializeDatabase.class);
+            startService(intent);
+        }
+
+        //自动获取天气服务
+
+
+        //主界面
+        ImageView enter_button = (ImageView) findViewById(R.id.enter_button);
+        enter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(MainActivity.this, IndoorSceneActivity.class);
+                startActivity(intent1);
+            }
+        });
     }
 
 
