@@ -2,10 +2,8 @@ package com.ecnu.myplant.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +16,6 @@ import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
 import com.ecnu.myplant.db.MyPlant;
 import com.ecnu.myplant.db.Plant;
-import com.ecnu.myplant.db.ProvincePlant;
 import com.ecnu.myplant.service.ViewAnimation;
 import com.ecnu.myplant.LongTouchBtn;
 
@@ -32,12 +29,27 @@ import java.util.List;
  */
 
 public class FragmentOne extends Fragment {
-    int num = 0;
-    int flag = 0;
+    int waterNum = 0;
+    int fertilizerNum = 0;
+    int waterFlag = 0;
+    int fertilizerFlag = 0;
     ImageView imageView = null;
     LinearLayout tools = null;
     boolean has = false;
     String plantName = null;
+    ImageView watchSoil;
+    ImageView fertilizer;
+    ImageView water;
+    FrameLayout board;
+    ImageView watchLeaf;
+    ImageView waterOk;
+    ImageView fertilizerOk;
+    ImageView waterCancel;
+    ImageView fertilizerCancel;
+    ImageView watchOk;
+    LongTouchBtn waterProgress;
+    LongTouchBtn fertilizerProgress;
+    ImageView indoorWatch;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -45,20 +57,19 @@ public class FragmentOne extends Fragment {
         View view = inflater.inflate(R.layout.fragment_one, container, false);
         imageView = (ImageView) view.findViewById(R.id.image);//盆栽
         tools = (LinearLayout) view.findViewById(R.id.indoor_tools);
-        ImageView indoorWatch = (ImageView) view.findViewById(R.id.indoor_watch);//观察按钮
-        ImageView fertilizer = (ImageView) view.findViewById(R.id.indoor_fertilizer);//施肥按钮
-        final ImageView water = (ImageView) view.findViewById(R.id.indoor_water);//浇水按钮
-        final FrameLayout board = (FrameLayout) view.findViewById(R.id.board);//面板
-        board.setVisibility(View.GONE);
-        final ImageView watchSoil = (ImageView) view.findViewById(R.id.watch_soil);//观察面板的土壤
-        final ImageView watchLeaf = (ImageView) view.findViewById(R.id.watch_leaf);//观察面板的叶子
-        final ImageView waterOk = (ImageView) view.findViewById(R.id.indoor_water_ok);//浇水面板确认键
-        final ImageView fertilizerOk = (ImageView) view.findViewById(R.id.indoor_fertilizer_ok);//施肥面板确认键
-        final ImageView waterCancel = (ImageView) view.findViewById(R.id.indoor_water_cancel);//浇水面板取消键
-        final ImageView fertilizerCancel = (ImageView) view.findViewById(R.id.indoor_fertilizer_cancel); //施肥面板取消键
-        final ImageView watchOk = (ImageView) view.findViewById(R.id.indoor_watch_ok);//观察面板确认键
-        final LongTouchBtn progressBar = (LongTouchBtn) view.findViewById(R.id.progress_bar);;//进度条控件
-
+        indoorWatch = (ImageView) view.findViewById(R.id.indoor_watch);//观察按钮
+        fertilizer = (ImageView) view.findViewById(R.id.indoor_fertilizer);//施肥按钮
+        water = (ImageView) view.findViewById(R.id.indoor_water);//浇水按钮
+        board = (FrameLayout) view.findViewById(R.id.board);//面板
+        watchSoil = (ImageView) view.findViewById(R.id.watch_soil);//观察面板的土壤
+        watchLeaf = (ImageView) view.findViewById(R.id.watch_leaf);//观察面板的叶子
+        waterOk = (ImageView) view.findViewById(R.id.indoor_water_ok);//浇水面板确认键
+        fertilizerOk = (ImageView) view.findViewById(R.id.indoor_fertilizer_ok);//施肥面板确认键
+        waterCancel = (ImageView) view.findViewById(R.id.indoor_water_cancel);//浇水面板取消键
+        fertilizerCancel = (ImageView) view.findViewById(R.id.indoor_fertilizer_cancel); //施肥面板取消键
+        watchOk = (ImageView) view.findViewById(R.id.indoor_watch_ok);//观察面板确认键
+        waterProgress = (LongTouchBtn) view.findViewById(R.id.water_progress);//浇水进度条
+        fertilizerProgress = (LongTouchBtn) view.findViewById(R.id.fertilizer_progress);//施肥进度条
 
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
@@ -75,6 +86,7 @@ public class FragmentOne extends Fragment {
                 board.setVisibility(View.VISIBLE);
                 fertilizerCancel.setVisibility(View.VISIBLE);
                 fertilizerOk.setVisibility(View.VISIBLE);
+                fertilizerProgress.setVisibility(View.VISIBLE);
             }
         });
         water.setOnClickListener(new View.OnClickListener() {//浇水按钮监听器
@@ -82,7 +94,8 @@ public class FragmentOne extends Fragment {
             public void onClick(View view) {
                 board.setVisibility(View.VISIBLE);
                 waterCancel.setVisibility(View.VISIBLE);
-                watchOk.setVisibility(View.VISIBLE);
+                waterOk.setVisibility(View.VISIBLE);
+                waterProgress.setVisibility(View.VISIBLE);
             }
         });
 
@@ -101,8 +114,12 @@ public class FragmentOne extends Fragment {
             public void onClick(View view) {
                 board.setVisibility(View.GONE);
                 waterCancel.setVisibility(View.GONE);
-                watchOk.setVisibility(View.GONE);
-                //数据库更新操作
+                waterOk.setVisibility(View.GONE);
+                waterProgress.setVisibility(View.GONE);
+                //数据库更新操作,获取waterNum数据，之后waterNum归零
+                waterNum = 0;
+                waterProgress.setProgress(0);
+                waterFlag = 0;
             }
         });
 
@@ -111,7 +128,11 @@ public class FragmentOne extends Fragment {
             public void onClick(View view) {
                 board.setVisibility(View.GONE);
                 waterCancel.setVisibility(View.GONE);
-                watchOk.setVisibility(View.GONE);
+                waterOk.setVisibility(View.GONE);
+                waterProgress.setVisibility(View.GONE);
+                waterNum = 0;
+                waterProgress.setProgress(0);
+                waterFlag = 0;
             }
         });
 
@@ -121,7 +142,11 @@ public class FragmentOne extends Fragment {
                 board.setVisibility(View.GONE);
                 fertilizerCancel.setVisibility(View.GONE);
                 fertilizerOk.setVisibility(View.GONE);
-                //数据库更新操作
+                fertilizerProgress.setVisibility(View.GONE);
+                //数据库更新操作，获取fertilizerNum数据，之后fertilizerNum归零
+                fertilizerNum = 0;
+                fertilizerProgress.setProgress(0);
+                fertilizerFlag = 0;
             }
         });
 
@@ -131,11 +156,14 @@ public class FragmentOne extends Fragment {
                 board.setVisibility(View.GONE);
                 fertilizerCancel.setVisibility(View.GONE);
                 fertilizerOk.setVisibility(View.GONE);
+                fertilizerProgress.setVisibility(View.GONE);
+                fertilizerNum = 0;
+                fertilizerProgress.setProgress(0);
+                fertilizerFlag = 0;
             }
         });
 
-
-        progressBar.setOnClickListener(new View.OnClickListener() {
+        waterProgress.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
@@ -143,7 +171,7 @@ public class FragmentOne extends Fragment {
 
             }
         });
-        progressBar.setOnLongClickListener(new View.OnLongClickListener() {
+        waterProgress.setOnLongClickListener(new View.OnLongClickListener() {
 
             @Override
             public boolean onLongClick(View v) {
@@ -152,38 +180,72 @@ public class FragmentOne extends Fragment {
             }
         });
 
-        /**
-         * 这是一个自定义的接口 专门负责处理长按逻辑
-         *   @param listener
-         *            监听器。
-         * @param time
-         *            第2个参数传入1000 ,表示1秒处理一次onLongTouch()方法
-         */
-
-        progressBar.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {
+        waterProgress.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {//浇水进度条控件
 
             @Override
             public void onLongTouch() {
 
-                if(flag == 0) {
-                    num = num + 5;
-                    progressBar.setProgress(num);
+                if(waterFlag == 0) {
+                    waterNum = waterNum + 5;
+                    waterProgress.setProgress(waterNum);
 
                 }
-                else if(flag == 1) {
-                    num = num - 5;
-                    progressBar.setProgress(num);
+                else if(waterFlag == 1) {
+                    waterNum = waterNum - 5;
+                    waterProgress.setProgress(waterNum);
                 }
-                if(num == 100) {
-                    flag = 1;
+                if(waterNum == 100) {
+                    waterFlag = 1;
                 }
-                if(num == 0) {
-                    flag = 0;
+                if(waterNum == 0) {
+                    waterFlag = 0;
                 }
 
             }
         },100);
 
+        fertilizerProgress.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                //Log.i("test", "自定义按钮处理单击");
+
+            }
+        });
+        fertilizerProgress.setOnLongClickListener(new View.OnLongClickListener() {
+
+            @Override
+            public boolean onLongClick(View v) {
+                //Log.i("test", "自定义按钮处理长按一次相应");
+                return false;
+            }
+        });
+
+        fertilizerProgress.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {//施肥进度条控件
+
+            @Override
+            public void onLongTouch() {
+
+                if(fertilizerFlag == 0) {
+                    fertilizerNum = fertilizerNum + 5;
+                    fertilizerProgress.setProgress(fertilizerNum);
+
+                }
+                else if(fertilizerFlag == 1) {
+                    fertilizerNum = fertilizerNum - 5;
+                    fertilizerProgress.setProgress(fertilizerNum);
+                }
+                if(fertilizerNum == 100) {
+                    fertilizerFlag = 1;
+                }
+                if(fertilizerNum == 0) {
+                    fertilizerFlag = 0;
+                }
+
+            }
+        },100);
+
+        //获取数据
         getData();
 
         return view;

@@ -153,6 +153,38 @@
         android:background="@drawable/map_dialog"
         android:visibility="gone">
 
+        <com.ecnu.myplant.LongTouchBtn
+            android:id="@+id/outdoor_water_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="101"
+            android:visibility="gone"/>
+        <com.ecnu.myplant.LongTouchBtn
+            android:id="@+id/outdoor_soil_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="101"
+            android:visibility="gone"/>
+        <com.ecnu.myplant.LongTouchBtn
+            android:id="@+id/outdoor_pest_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="101"
+            android:visibility="gone"/>
+        <com.ecnu.myplant.LongTouchBtn
+            android:id="@+id/outdoor_fertilizer_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="101"
+            android:visibility="gone"/>
         <ImageView
             android:id="@+id/outdoor_watch_soil"
             android:layout_width="wrap_content"

@@ -135,15 +135,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@drawable/map_dialog"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <com.ecnu.myplant.LongTouchBtn
-            android:id="@+id/progress_bar"
+            android:id="@+id/water_progress"
             style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="281dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:max="101" />
+            android:max="101"
+            android:visibility="gone"/>
+
+        <com.ecnu.myplant.LongTouchBtn
+            android:id="@+id/fertilizer_progress"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:max="101"
+            android:visibility="gone"/>
 
         <ImageView
             android:id="@+id/watch_soil"
