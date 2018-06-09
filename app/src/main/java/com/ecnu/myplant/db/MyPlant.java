@@ -72,5 +72,13 @@ public class MyPlant extends DataSupport{
     private int waterContent;//0-100
     private int soilFertility;//0-100
     private int leafCondition;//0-100
+    private int pestsContent;//0-100
 
+    public int getPestsContent() {
+        return pestsContent;
+    }
+
+    public void setPestsContent(int pestsContent) {
+        this.pestsContent = pestsContent;
+    }
 }
