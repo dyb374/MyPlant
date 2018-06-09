@@ -12,6 +12,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ecnu.myplant.LongTouchBtn;
 import com.ecnu.myplant.OutdoorsSeedActivity;
@@ -34,6 +35,7 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FragmentSix extends Fragment {
+    private int outdoorFragmentNumber = 1;
     int waterNum = 0;
     int fertilizerNum = 0;
     int soilNum = 0;
@@ -160,6 +162,29 @@ public class FragmentSix extends Fragment {
                 waterOk.setVisibility(View.GONE);
                 waterProgress.setVisibility(View.GONE);
                 //data
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                            count++;
+                            if (count == outdoorFragmentNumber){
+                                int newWaterNum = mp.getWaterContent() + waterNum / 3;
+                                if (newWaterNum >= 0 && newWaterNum <= 100){
+                                    int id = mp.getId();
+                                    MyPlant  mp2 = new MyPlant();
+                                    mp2.setWaterContent(newWaterNum);
+                                    mp2.update(id);
+                                    Toast.makeText(getActivity(), "已成功浇水：" + waterNum / 3 + "！", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "植物水量已满，无法浇水！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }
                 waterNum = 0;
                 waterProgress.setProgress(0);
                 waterFlag = 0;
@@ -187,6 +212,29 @@ public class FragmentSix extends Fragment {
                 soilOk.setVisibility(View.GONE);
                 soilProgress.setVisibility(View.GONE);
                 //data
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                            count++;
+                            if (count == outdoorFragmentNumber){
+                                int newSoilNum = mp.getSoilFertility() + soilNum / 3;
+                                if (newSoilNum >= 0 && newSoilNum <= 100){
+                                    int id = mp.getId();
+                                    MyPlant  mp2 = new MyPlant();
+                                    mp2.setSoilFertility(newSoilNum);
+                                    mp2.update(id);
+                                    Toast.makeText(getActivity(), "已成功松土：" + soilNum / 3 + "！", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "松土量已满，无法松土！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }
                 soilNum = 0;
                 soilProgress.setProgress(0);
                 soilFlag = 0;
@@ -214,6 +262,29 @@ public class FragmentSix extends Fragment {
                 fertilizerOk.setVisibility(View.GONE);
                 fertilizerProgress.setVisibility(View.GONE);
                 //data
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                            count++;
+                            if (count == outdoorFragmentNumber){
+                                int newFertilizerNum = mp.getLeafCondition() + fertilizerNum / 3;
+                                if (newFertilizerNum >= 0 && newFertilizerNum <= 100){
+                                    int id = mp.getId();
+                                    MyPlant  mp2 = new MyPlant();
+                                    mp2.setLeafCondition(newFertilizerNum);
+                                    mp2.update(id);
+                                    Toast.makeText(getActivity(), "已成功施肥：" + fertilizerNum / 3 + "！", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "土壤肥度已满，无法施肥！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }
                 fertilizerNum = 0;
                 fertilizerProgress.setProgress(0);
                 fertilizerFlag = 0;
@@ -241,6 +312,29 @@ public class FragmentSix extends Fragment {
                 pestOk.setVisibility(View.GONE);
                 pestProgress.setVisibility(View.GONE);
                 //data
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                            count++;
+                            if (count == outdoorFragmentNumber){
+                                int newPestNum = mp.getPestsContent() + pestNum / 3;
+                                if (newPestNum >= 0 && newPestNum <= 100){
+                                    int id = mp.getId();
+                                    MyPlant  mp2 = new MyPlant();
+                                    mp2.setPestsContent(newPestNum);
+                                    mp2.update(id);
+                                    Toast.makeText(getActivity(), "已成功除虫：" + pestNum / 3 + "！", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "除虫量已满，无法除虫！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }
                 pestNum = 0;
                 pestProgress.setProgress(0);
                 pestFlag = 0;
@@ -445,7 +539,7 @@ public class FragmentSix extends Fragment {
             for(Plant p : ps) {
                 if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
                     count++;
-                    if (count == 1){
+                    if (count == outdoorFragmentNumber){
                         has = true;
                         plantName = mp.getPlant();
                         break;

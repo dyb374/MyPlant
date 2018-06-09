@@ -65,6 +65,14 @@ public class MyPlant extends DataSupport{
         this.leafCondition = leafCondition;
     }
 
+    public int getPestsContent() {
+        return pestsContent;
+    }
+
+    public void setPestsContent(int pestsContent) {
+        this.pestsContent = pestsContent;
+    }
+
     private int id;
     private String plant;
     private int stateOfLife;//生命状态0-死亡，1-健康，2-不健康
@@ -73,12 +81,4 @@ public class MyPlant extends DataSupport{
     private int soilFertility;//0-100
     private int leafCondition;//0-100
     private int pestsContent;//0-100
-
-    public int getPestsContent() {
-        return pestsContent;
-    }
-
-    public void setPestsContent(int pestsContent) {
-        this.pestsContent = pestsContent;
-    }
 }

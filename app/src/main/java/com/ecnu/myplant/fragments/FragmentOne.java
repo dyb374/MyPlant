@@ -11,6 +11,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
@@ -29,6 +30,7 @@ import java.util.List;
  */
 
 public class FragmentOne extends Fragment {
+    private int indoorFragmentNumber = 1;
     int waterNum = 0;
     int fertilizerNum = 0;
     int waterFlag = 0;
@@ -117,6 +119,29 @@ public class FragmentOne extends Fragment {
                 waterOk.setVisibility(View.GONE);
                 waterProgress.setVisibility(View.GONE);
                 //数据库更新操作,获取waterNum数据，之后waterNum归零
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
+                            count++;
+                            if (count == indoorFragmentNumber){
+                                int newWaterNum = mp.getWaterContent() + waterNum / 3;
+                                if (newWaterNum >= 0 && newWaterNum <= 100){
+                                    int id = mp.getId();
+                                    MyPlant  mp2 = new MyPlant();
+                                    mp2.setWaterContent(newWaterNum);
+                                    mp2.update(id);
+                                    Toast.makeText(getActivity(), "已成功浇水：" + waterNum / 3 + "！", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "植物水量已满，无法浇水！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }
                 waterNum = 0;
                 waterProgress.setProgress(0);
                 waterFlag = 0;
@@ -144,6 +169,29 @@ public class FragmentOne extends Fragment {
                 fertilizerOk.setVisibility(View.GONE);
                 fertilizerProgress.setVisibility(View.GONE);
                 //数据库更新操作，获取fertilizerNum数据，之后fertilizerNum归零
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
+                            count++;
+                            if (count == indoorFragmentNumber){
+                                int newFertilizerNum = mp.getLeafCondition() + fertilizerNum / 3;
+                                if (newFertilizerNum >= 0 && newFertilizerNum <= 100){
+                                    int id = mp.getId();
+                                    MyPlant  mp2 = new MyPlant();
+                                    mp2.setLeafCondition(newFertilizerNum);
+                                    mp2.update(id);
+                                    Toast.makeText(getActivity(), "已成功施肥：" + fertilizerNum / 3 + "！", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    Toast.makeText(getActivity(), "土壤肥度已满，无法施肥！", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }
+                    }
+                }
                 fertilizerNum = 0;
                 fertilizerProgress.setProgress(0);
                 fertilizerFlag = 0;
@@ -267,7 +315,7 @@ public class FragmentOne extends Fragment {
             for(Plant p : ps) {
                 if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
                     count++;
-                    if (count == 1){
+                    if (count == indoorFragmentNumber){
                         has = true;
                         plantName = mp.getPlant();
                         break;
