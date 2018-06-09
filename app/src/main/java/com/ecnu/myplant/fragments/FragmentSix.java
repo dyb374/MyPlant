@@ -127,6 +127,26 @@ public class FragmentSix extends Fragment {
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
                 watchOk.setVisibility(View.VISIBLE);
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                            count++;
+                            if (count == outdoorFragmentNumber){
+                                waterNum = mp.getWaterContent();
+                                fertilizerNum = mp.getLeafCondition();
+                                soilNum = mp.getSoilFertility();
+                                pestNum = mp.getPestsContent();
+                                Log.d(TAG, "waterNum: " + waterNum);
+                                Log.d(TAG, "fertilizerNum: " + fertilizerNum);
+                                Log.d(TAG, "soilNum: " + soilNum);
+                                Log.d(TAG, "pestNum: " + pestNum);
+                            }
+                        }
+                    }
+                }
             }
         });
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器

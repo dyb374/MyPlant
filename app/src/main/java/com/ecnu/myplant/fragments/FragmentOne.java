@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.media.AudioManager;
 import android.content.Context;
 
 
+import com.bumptech.glide.util.LogTime;
 import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
 import com.ecnu.myplant.db.MyPlant;
@@ -62,7 +64,7 @@ public class FragmentOne extends Fragment {
     int fertilizermusic;
     SoundPool watersp;
     int watermusic;
-
+    private static final String TAG = "FragmentOne";
 
     @Nullable
     @Override
@@ -91,7 +93,6 @@ public class FragmentOne extends Fragment {
 
 
 
-
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
             public void onClick(View view) {
@@ -99,6 +100,22 @@ public class FragmentOne extends Fragment {
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
                 watchOk.setVisibility(View.VISIBLE);
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
+                            count++;
+                            if (count == indoorFragmentNumber){
+                                waterNum = mp.getWaterContent();
+                                fertilizerNum = mp.getLeafCondition();
+                                Log.d(TAG, "waterNum: " + waterNum);
+                                Log.d(TAG, "fertilizerNum: " + fertilizerNum);
+                            }
+                        }
+                    }
+                }
             }
         });
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
