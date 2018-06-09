@@ -49,6 +49,7 @@ public class FragmentOne extends Fragment {
         ImageView fertilizer = (ImageView) view.findViewById(R.id.indoor_fertilizer);//施肥按钮
         final ImageView water = (ImageView) view.findViewById(R.id.indoor_water);//浇水按钮
         final FrameLayout board = (FrameLayout) view.findViewById(R.id.board);//面板
+        board.setVisibility(View.GONE);
         final ImageView watchSoil = (ImageView) view.findViewById(R.id.watch_soil);//观察面板的土壤
         final ImageView watchLeaf = (ImageView) view.findViewById(R.id.watch_leaf);//观察面板的叶子
         final ImageView waterOk = (ImageView) view.findViewById(R.id.indoor_water_ok);//浇水面板确认键

@@ -20,7 +20,7 @@ public class InitializeDatabase extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        String[] plantName = {"bamboo", "cactus", "peony", "acacia", "rose", "lily", "begonia", "magnolia"};
+        String[] plantName = {"cactus", "peony", "rose", "lily", "begonia", "willow" ,"bamboo", "ginkgo"};
         for(int i = 0; i < plantName.length; i++) {
             Plant p = new Plant();
             p.setName(plantName[i]);
