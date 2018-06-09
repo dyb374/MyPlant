@@ -10,6 +10,7 @@ import android.os.IBinder;
 import android.os.SystemClock;
 
 import com.ecnu.myplant.MainActivity;
+import com.ecnu.myplant.gson.Weather;
 
 import java.util.Date;
 
@@ -18,7 +19,7 @@ import java.util.Date;
  */
 
 public class WeatherUpdate extends Service {
-
+    public static Weather weather;                                                 //每隔一天更新此实例
     public AlarmManager alarmManager;
 
     @Override
@@ -35,7 +36,8 @@ public class WeatherUpdate extends Service {
                 // String city = MainActivity.city.replace("市","");
                 CustomWeatherReport.getWeatherJSON("上海");               //真机用city替代
                 CustomWeatherReport.getSimpleWeatherJSON();
-                MainActivity.weather = CustomWeatherReport.JSONToWeather();
+                weather = CustomWeatherReport.JSONToWeather();
+                //根据天气数据修改数据库
             }
         }).start();
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
