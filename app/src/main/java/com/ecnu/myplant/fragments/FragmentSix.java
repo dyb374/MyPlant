@@ -33,13 +33,17 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FragmentSix extends Fragment {
+    ImageView imageView = null;
+    LinearLayout tools = null;
+    boolean has = false;
+    String plantName = null;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //植物的不同成长阶段就加载不同的layout
         View view = inflater.inflate(R.layout.fragment_six, container, false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.image);//盆栽
-        final LinearLayout tools = (LinearLayout) view.findViewById(R.id.outdoor_tools);
+        imageView = (ImageView) view.findViewById(R.id.image);//盆栽
+        tools = (LinearLayout) view.findViewById(R.id.outdoor_tools);
         ImageView outdoorWatch = (ImageView) view.findViewById(R.id.outdoor_watch);//观察按钮
         ImageView fertilizer = (ImageView) view.findViewById(R.id.outdoor_fertilizer);//施肥按钮
         ImageView water = (ImageView) view.findViewById(R.id.outdoor_water);//浇水按钮
@@ -180,10 +184,20 @@ public class FragmentSix extends Fragment {
                 pestOk.setVisibility(View.GONE);
             }
         });
+        getData();
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
+    void getData (){
         //通过修改imageview的src来加载不同植物状态显示的图片
-        boolean has = false;
+        //计算myplant中的室内植物
         int count = 0;
-        String plantNmae = null;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
         List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
@@ -192,7 +206,7 @@ public class FragmentSix extends Fragment {
                     count++;
                     if (count == 1){
                         has = true;
-                        plantNmae = mp.getPlant();
+                        plantName = mp.getPlant();
                         break;
                     }
                 }
@@ -222,6 +236,6 @@ public class FragmentSix extends Fragment {
             });
 
         }
-        return view;
     }
+
 }

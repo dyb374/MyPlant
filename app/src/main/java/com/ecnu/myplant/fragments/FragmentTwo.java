@@ -30,6 +30,10 @@ import java.util.List;
  */
 
 public class FragmentTwo extends Fragment {
+    ImageView imageView = null;
+    LinearLayout tools = null;
+    boolean has = false;
+    String plantName = null;
     @Nullable
     @Override
 
@@ -37,8 +41,8 @@ public class FragmentTwo extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //植物的不同成长阶段就加载不同的layout
         View view = inflater.inflate(R.layout.fragment_two, container, false);
-        ImageView imageView = (ImageView) view.findViewById(R.id.image);//盆栽
-        final LinearLayout tools = (LinearLayout) view.findViewById(R.id.indoor_tools);
+        imageView = (ImageView) view.findViewById(R.id.image);//盆栽
+        tools = (LinearLayout) view.findViewById(R.id.indoor_tools);
         ImageView indoorWatch = (ImageView) view.findViewById(R.id.indoor_watch);//观察按钮
         ImageView fertilizer = (ImageView) view.findViewById(R.id.indoor_fertilizer);//施肥按钮
         ImageView water = (ImageView) view.findViewById(R.id.indoor_water);//浇水按钮
@@ -72,10 +76,21 @@ public class FragmentTwo extends Fragment {
                 watchLeaf.setVisibility(View.VISIBLE);
             }
         });
+        getData();
+        return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getData();
+    }
+
+    void getData (){
         //通过修改imageview的src来加载不同植物状态显示的图片
-        boolean has = false;
+        //计算myplant中的室内植物
         int count = 0;
-        String plantNmae = null;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
         List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
@@ -84,7 +99,7 @@ public class FragmentTwo extends Fragment {
                     count++;
                     if (count == 2){
                         has = true;
-                        plantNmae = mp.getPlant();
+                        plantName = mp.getPlant();
                         break;
                     }
                 }
@@ -114,6 +129,6 @@ public class FragmentTwo extends Fragment {
             });
 
         }
-        return view;
     }
+
 }

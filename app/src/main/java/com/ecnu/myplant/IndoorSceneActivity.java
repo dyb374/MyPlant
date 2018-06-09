@@ -287,4 +287,6 @@ public class IndoorSceneActivity extends AppCompatActivity {
 //        startActivity(intent);
 //    }
 
+
+
 }

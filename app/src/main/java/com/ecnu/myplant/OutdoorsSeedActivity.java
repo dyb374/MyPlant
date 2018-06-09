@@ -49,28 +49,25 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
                 com.ecnu.myplant.Seed seed = seedList.get(position);
                 boolean has = false;
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-                for (MyPlant mp : mps) {
-                    if (mp.getPlant().equals(seed.getName())) {
-                        has = true;
-                        Toast.makeText(OutdoorsSeedActivity.this, "你已领养了植物:" + seed.getName() + "！", Toast.LENGTH_SHORT).show();
+                MyPlant mp = new MyPlant();
+                mp.setPlant(seed.getName());
+                mp.setStateOfLife(1);
+                mp.setLevel(50);
+                mp.setWaterContent(50);
+                mp.setSoilFertility(50);
+                mp.setLeafCondition(50);
+                mp.save();
+                Toast.makeText(OutdoorsSeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
+                List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
+                int deleteId = 0;
+                for(ProvincePlant pp : pps) {
+                    if(pp.getPlant().equals(seed.getName())){
+                        deleteId = pp.getId();
                     }
                 }
-                if (!has) {
-                    MyPlant mp = new MyPlant();
-                    mp.setPlant(seed.getName());
-                    mp.save();
-                    Toast.makeText(OutdoorsSeedActivity.this, "成功领养植物：" + seed.getName() + "！", Toast.LENGTH_SHORT).show();
-                    List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
-                    int deleteId = 0;
-                    for(ProvincePlant pp : pps) {
-                        if(pp.getPlant().equals(seed.getName())){
-                            deleteId = pp.getId();
-                        }
-                    }
-                    DataSupport.delete(ProvincePlant.class, deleteId);
-                    Intent intent = new Intent(OutdoorsSeedActivity.this, OutdoorSceneActivity.class);
-                    startActivity(intent);
-                }
+                DataSupport.delete(ProvincePlant.class, deleteId);
+                Intent intent = new Intent(OutdoorsSeedActivity.this, OutdoorSceneActivity.class);
+                startActivity(intent);
             }
         });
 
