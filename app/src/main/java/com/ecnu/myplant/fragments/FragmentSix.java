@@ -1,6 +1,8 @@
 package com.ecnu.myplant.fragments;
 
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -69,6 +71,15 @@ public class FragmentSix extends Fragment {
     ImageView water;
     ImageView soil;
     ImageView pest;
+    SoundPool fertilizersp;
+    int fertilizermusic;
+    SoundPool watersp;
+    int watermusic;
+    SoundPool soilsp;
+    int soilmusic;
+    SoundPool spraysp;
+    int spraymusic;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,6 +108,16 @@ public class FragmentSix extends Fragment {
         fertilizerProgress = (LongTouchBtn) view.findViewById(R.id.outdoor_fertilizer_progress);//施肥进度条
         pestProgress = (LongTouchBtn) view.findViewById(R.id.outdoor_pest_progress);//除虫进度条
         soilProgress = (LongTouchBtn) view.findViewById(R.id.outdoor_soil_progress);//松土进度条
+        fertilizersp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        fertilizermusic = fertilizersp.load(this.getActivity(),R.raw.pesticide,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+        watersp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        watermusic = watersp.load(this.getActivity(),R.raw.water,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+        soilsp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        soilmusic = soilsp.load(this.getActivity(),R.raw.soil,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+        spraysp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        spraymusic = spraysp.load(this.getActivity(),R.raw.spray,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+
+
 
         outdoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
@@ -359,6 +380,7 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
+                watersp.stop(watermusic);
 
             }
         });
@@ -367,6 +389,7 @@ public class FragmentSix extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                watersp.play(watermusic, 1, 1, 0, 0, 1);
                 return false;
             }
         });
@@ -400,6 +423,7 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
+                fertilizersp.stop(fertilizermusic);
 
             }
         });
@@ -408,6 +432,7 @@ public class FragmentSix extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);
                 return false;
             }
         });
@@ -441,6 +466,7 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
+                soilsp.stop(soilmusic);
 
             }
         });
@@ -449,6 +475,7 @@ public class FragmentSix extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                soilsp.play(soilmusic, 1, 1, 0, 0, 1);
                 return false;
             }
         });
@@ -482,6 +509,7 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
+                spraysp.stop(spraymusic);
 
             }
         });
@@ -490,6 +518,7 @@ public class FragmentSix extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                spraysp.play(spraymusic, 1, 1, 0, 0, 1);
                 return false;
             }
         });

@@ -59,6 +59,9 @@ public class FragmentOne extends Fragment {
     ImageView indoorWatch;
     SoundPool fertilizersp;
     int fertilizermusic;
+    SoundPool watersp;
+    int watermusic;
+
 
     @Nullable
     @Override
@@ -82,6 +85,11 @@ public class FragmentOne extends Fragment {
         fertilizerProgress = (LongTouchBtn) view.findViewById(R.id.fertilizer_progress);//施肥进度条
         fertilizersp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         fertilizermusic = fertilizersp.load(this.getActivity(),R.raw.pesticide,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+        watersp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        watermusic = watersp.load(this.getActivity(),R.raw.water,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+
+
+
 
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
@@ -181,7 +189,7 @@ public class FragmentOne extends Fragment {
                 //数据库更新操作，获取fertilizerNum数据，之后fertilizerNum归零
                 int count = 0;
 
-                fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);//开启音频,(对音频文件播放的设置 例如左右声道等)
+
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
                 List<Plant> ps = DataSupport.findAll(Plant.class);
                 for(MyPlant mp : mps) {
@@ -228,6 +236,7 @@ public class FragmentOne extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
+                watersp.stop(watermusic);
 
             }
         });
@@ -236,6 +245,7 @@ public class FragmentOne extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                watersp.play(watermusic, 1, 1, 0, 0, 1);
                 return false;
             }
         });
@@ -269,7 +279,7 @@ public class FragmentOne extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
-
+                fertilizersp.stop(fertilizermusic);
             }
         });
         fertilizerProgress.setOnLongClickListener(new View.OnLongClickListener() {
@@ -277,6 +287,7 @@ public class FragmentOne extends Fragment {
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);//开启音频,(对音频文件播放的设置 例如左右声道等)
                 return false;
             }
         });
