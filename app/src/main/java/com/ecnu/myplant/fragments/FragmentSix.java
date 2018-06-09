@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
@@ -380,19 +381,31 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
-                watersp.stop(watermusic);
+                //watersp.stop(watermusic);
 
             }
         });
         waterProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int waterid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
-                watersp.play(watermusic, 1, 1, 0, 0, 1);
+                waterid = watersp.play(watermusic, 1, 1, 0, 0, 1);
+
+                return false;
+
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    watersp.stop(waterid);
+                }
                 return false;
             }
-        });
+
+            });
+
+
 
         waterProgress.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {//浇水进度条控件
 
@@ -423,16 +436,23 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
-                fertilizersp.stop(fertilizermusic);
+                //fertilizersp.stop(fertilizermusic);
 
             }
         });
         fertilizerProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int fertizerid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
-                fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);
+                fertizerid = fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);
+                return false;
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    watersp.stop(fertizerid);
+                }
                 return false;
             }
         });
@@ -466,16 +486,23 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
-                soilsp.stop(soilmusic);
+                //soilsp.stop(soilmusic);
 
             }
         });
         soilProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int soilid;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
-                soilsp.play(soilmusic, 1, 1, 0, 0, 1);
+                soilid = soilsp.play(soilmusic, 1, 1, 0, 0, 1);
+                return false;
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    soilsp.stop(soilid);
+                }
                 return false;
             }
         });
@@ -509,16 +536,23 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
-                spraysp.stop(spraymusic);
+                //spraysp.stop(spraymusic);
 
             }
         });
         pestProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int pestid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
-                spraysp.play(spraymusic, 1, 1, 0, 0, 1);
+                pestid = spraysp.play(spraymusic, 1, 1, 0, 0, 1);
+                return false;
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    spraysp.stop(pestid);
+                }
                 return false;
             }
         });

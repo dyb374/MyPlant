@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
@@ -241,13 +242,23 @@ public class FragmentOne extends Fragment {
             }
         });
         waterProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int waterid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
-                watersp.play(watermusic, 1, 1, 0, 0, 1);
+                waterid = watersp.play(watermusic, 1, 1, 0, 0, 1);
+
+                return false;
+
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    watersp.stop(waterid);
+                }
                 return false;
             }
+
         });
 
         waterProgress.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {//浇水进度条控件
@@ -283,11 +294,18 @@ public class FragmentOne extends Fragment {
             }
         });
         fertilizerProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int fertizerid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
-                fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);//开启音频,(对音频文件播放的设置 例如左右声道等)
+                fertizerid = fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);
+                return false;
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    watersp.stop(fertizerid);
+                }
                 return false;
             }
         });
