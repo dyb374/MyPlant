@@ -78,6 +78,14 @@
             android:name=".service.InitializeDatabase"
             android:enabled="true"
             android:exported="true" />
+        <service
+            android:name=".service.WeatherUpdate"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".service.AlarmReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
 
     </application>

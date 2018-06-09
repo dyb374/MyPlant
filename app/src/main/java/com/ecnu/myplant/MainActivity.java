@@ -22,8 +22,10 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.location.BDAbstractLocationListener;
 import com.ecnu.myplant.db.Plant;
+import com.ecnu.myplant.gson.Weather;
 import com.ecnu.myplant.service.CustomWeatherReport;
 import com.ecnu.myplant.service.InitializeDatabase;
+import com.ecnu.myplant.service.WeatherUpdate;
 
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public BDAbstractLocationListener myListener = new MyLocationListener();
     public LocationClientOption option = new LocationClientOption();
     public static String city;
-
+    public static Weather weather;                                                 //每隔一天更新此实例
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*
@@ -84,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //自动获取天气服务
-
+        Intent intent = new Intent(this, WeatherUpdate.class);
+        startService(intent);
 
         //主界面
         ImageView enter_button = (ImageView) findViewById(R.id.enter_button);
