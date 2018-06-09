@@ -147,16 +147,11 @@ public class FragmentOne extends Fragment {
                             count++;
                             if (count == indoorFragmentNumber){
                                 int newWaterNum = mp.getWaterContent() + waterNum / 3;
-                                if (newWaterNum >= 0 && newWaterNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setWaterContent(newWaterNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功浇水：" + waterNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "植物水量已满，无法浇水！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setWaterContent(newWaterNum > 100 ? 100 : newWaterNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功浇水！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -199,16 +194,11 @@ public class FragmentOne extends Fragment {
                             count++;
                             if (count == indoorFragmentNumber){
                                 int newFertilizerNum = mp.getLeafCondition() + fertilizerNum / 3;
-                                if (newFertilizerNum >= 0 && newFertilizerNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setLeafCondition(newFertilizerNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功施肥：" + fertilizerNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "土壤肥度已满，无法施肥！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setLeafCondition(newFertilizerNum > 100 ? 100 : newFertilizerNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功施肥！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

@@ -193,16 +193,11 @@ public class FragmentSix extends Fragment {
                             count++;
                             if (count == outdoorFragmentNumber){
                                 int newWaterNum = mp.getWaterContent() + waterNum / 3;
-                                if (newWaterNum >= 0 && newWaterNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setWaterContent(newWaterNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功浇水：" + waterNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "植物水量已满，无法浇水！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setWaterContent(newWaterNum > 100 ? 100 : newWaterNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功浇水！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -243,16 +238,11 @@ public class FragmentSix extends Fragment {
                             count++;
                             if (count == outdoorFragmentNumber){
                                 int newSoilNum = mp.getSoilFertility() + soilNum / 3;
-                                if (newSoilNum >= 0 && newSoilNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setSoilFertility(newSoilNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功松土：" + soilNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "松土量已满，无法松土！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setSoilFertility(newSoilNum > 100 ? 100 : newSoilNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功松土！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -293,16 +283,11 @@ public class FragmentSix extends Fragment {
                             count++;
                             if (count == outdoorFragmentNumber){
                                 int newFertilizerNum = mp.getLeafCondition() + fertilizerNum / 3;
-                                if (newFertilizerNum >= 0 && newFertilizerNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setLeafCondition(newFertilizerNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功施肥：" + fertilizerNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "土壤肥度已满，无法施肥！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setLeafCondition(newFertilizerNum > 100 ? 100 : newFertilizerNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功施肥！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -343,16 +328,11 @@ public class FragmentSix extends Fragment {
                             count++;
                             if (count == outdoorFragmentNumber){
                                 int newPestNum = mp.getPestsContent() + pestNum / 3;
-                                if (newPestNum >= 0 && newPestNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setPestsContent(newPestNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功除虫：" + pestNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "除虫量已满，无法除虫！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setPestsContent(newPestNum > 100 ? 100 : newPestNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功除虫！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
