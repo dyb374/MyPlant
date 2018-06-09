@@ -36,7 +36,7 @@
 
 
 
-                    <include layout="@layout/forecast" />
+                    <include layout="@layout/forecast"/>
 
                     <include layout="@layout/aqi" />
 

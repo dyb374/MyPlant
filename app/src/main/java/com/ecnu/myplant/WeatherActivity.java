@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.graphics.Typeface;
 
 
 import com.ecnu.myplant.gson.Weather;
@@ -34,15 +35,30 @@ public class WeatherActivity extends AppCompatActivity {
 
     private ScrollView weatherLayout;
 
+    private Typeface typeface;
+
     private TextView titleCity;
 
     private TextView titleUpdateTime;
 
     private TextView degreeText;
 
+    private TextView weatherinfo;
     //private TextView weatherInfoText;
 
     private LinearLayout forecastLayout;
+
+    private TextView sugges;
+
+    private TextView forecasttitle;
+
+    private TextView airquility;
+
+    private TextView aqititle;
+
+    private TextView pm25title;
+
+    private TextView forecasttext;
 
     private TextView aqiText;
 
@@ -58,7 +74,15 @@ public class WeatherActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_weather);
         // 初始化各控件
+        typeface = Typeface.createFromAsset(getAssets(),"fonts/ddyy.ttf");
         weatherLayout = (ScrollView) findViewById(R.id.weather_layout);
+        weatherinfo = (TextView) findViewById(R.id.weather_info);
+        sugges = (TextView) findViewById(R.id.sugges);
+        forecasttitle = (TextView) findViewById(R.id.forecast_tile);
+        airquility = (TextView) findViewById(R.id.quility);
+        aqititle = (TextView) findViewById(R.id.aqi_title);
+        pm25title = (TextView) findViewById(R.id.pm25_title);
+        forecasttext = (TextView) findViewById(R.id.forecast_text);
         titleCity = (TextView) findViewById(R.id.title_city);
         titleUpdateTime = (TextView) findViewById(R.id.title_update_time);
         degreeText = (TextView) findViewById(R.id.degree_text);
@@ -68,13 +92,34 @@ public class WeatherActivity extends AppCompatActivity {
         pm25Text = (TextView) findViewById(R.id.pm25_text);
         comfortText = (TextView) findViewById(R.id.comfort_text);
         requestWeather();
-        String info = "温度：" + weather.temp + "℃" + "\n"
-                + "风向：" + weather.wind_direction + "\n"
-                + "风力：" + weather.wind_strength + "\n"
-                + "湿度：" + weather.humidity + "\n"
-                + "时间：" + weather.time + "\n"
-                + "紫外线：" + weather.uv_index;                                 //API的干燥度都为空
+        String info = "     温度：" + weather.temp + "℃" + "\n"
+                + "     风向：" + weather.wind_direction + "\n"
+                + "     风力：" + weather.wind_strength + "\n"
+                + "     湿度：" + weather.humidity + "\n"
+                + "     时间：" + weather.time + "\n"
+                + "     紫外线：" + weather.uv_index;                                 //API的干燥度都为空
+
+
         //weatherInfoText.setText(info);
+        weatherinfo.setTypeface(typeface);
+        weatherinfo.setText(info);
+        sugges.setTypeface(typeface);
+        sugges.setText("天气状况");
+        forecasttitle.setTypeface(typeface);
+        forecasttitle.setText("今日");
+        airquility.setTypeface(typeface);
+        airquility.setText("空气质量");
+        aqititle.setTypeface(typeface);
+        aqititle.setText("aqi指数");
+        pm25title.setTypeface(typeface);
+        pm25title.setText("pm2.5指数");
+        aqiText.setTypeface(typeface);
+        aqiText.setText("37   优");
+        pm25Text.setTypeface(typeface);
+        pm25Text.setText("25μg/m³   优");
+        forecasttext.setTypeface(typeface);
+        forecasttext.setText(  "     上海   晴  " + weather.temp + "℃");
+
         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String weatherString = prefs.getString("weather", null);
         if (weatherString != null) {
