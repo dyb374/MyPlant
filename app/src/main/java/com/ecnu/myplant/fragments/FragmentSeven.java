@@ -652,22 +652,22 @@ public class FragmentSeven extends Fragment {
         if(has){
             //根据level大小和水分设置植物图片
             if (level == 0){
-                imageView.setImageResource(R.drawable.indoor_l1);
+                imageView.setImageResource(R.drawable.outdoor_l1);
             }
             else if (level > 0 && level < 100 && waterContent < 10){
-                imageView.setImageResource(R.drawable.indoor_l2u);
+                imageView.setImageResource(R.drawable.outdoor_l2u);
             }
             else if (level > 0 && level < 100 && waterContent >= 10){
-                imageView.setImageResource(R.drawable.indoor_l2);
+                imageView.setImageResource(R.drawable.outdoor_l2);
             }
             else if (level >= 100 && level < 150 && waterContent < 10){
-                imageView.setImageResource(R.drawable.indoor_l3u);
+                imageView.setImageResource(R.drawable.outdoor_l3u);
             }
             else if (level >= 100 && level < 150 && waterContent >= 10){
-                imageView.setImageResource(R.drawable.indoor_l3);
+                imageView.setImageResource(R.drawable.outdoor_l3);
             }
             else if (level == 150){
-                imageView.setImageResource(R.drawable.indoor_l4);
+                imageView.setImageResource(R.drawable.outdoor_l4);
             }
             //为image设置点击事件
             imageView.setOnClickListener(new View.OnClickListener() {
