@@ -110,6 +110,20 @@ public class FragmentTwo extends Fragment {
                             if (count == indoorFragmentNumber){
                                 waterNum = mp.getWaterContent();
                                 fertilizerNum = mp.getLeafCondition();
+                                if(returnNum(waterNum) == 1)
+                                    watchSoil.setImageResource(R.drawable.soil_watch1);
+                                else if(returnNum(waterNum) == 2)
+                                    watchSoil.setImageResource(R.drawable.soil_watch2);
+                                else if(returnNum(waterNum) == 3)
+                                    watchSoil.setImageResource(R.drawable.soil_watch3);
+
+                                if(returnNum(fertilizerNum) == 1)
+                                    watchLeaf.setImageResource(R.drawable.leaf1);
+                                else if(returnNum(fertilizerNum) == 2)
+                                    watchLeaf.setImageResource(R.drawable.leaf2);
+                                else if(returnNum(fertilizerNum) == 3)
+                                    watchLeaf.setImageResource(R.drawable.leaf3);
+
                                 int level = mp.getLevel();
                             }
                         }
@@ -348,6 +362,7 @@ public class FragmentTwo extends Fragment {
             @Override
             public void onClick(View view) {
                 //数据库删除后刷新界面
+                onResume();
                 removeBoard.setVisibility(View.GONE);
             }
         });
@@ -421,7 +436,7 @@ public class FragmentTwo extends Fragment {
                 @Override
                 public boolean onLongClick(View view) {
                     removeBoard.setVisibility(View.VISIBLE);
-                    return false;
+                    return true;
                 }
             });
 
@@ -437,6 +452,16 @@ public class FragmentTwo extends Fragment {
             });
 
         }
+    }
+    int returnNum(int a){
+        if(a>0&&a<=30)
+            return 1;
+        else if (a>30&&a<=60)
+            return 2;
+        else if (a>60)
+            return 3;
+        else
+            return 0;
     }
 
 }

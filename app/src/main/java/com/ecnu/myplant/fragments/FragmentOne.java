@@ -118,6 +118,20 @@ public class FragmentOne extends Fragment {
                             if (count == indoorFragmentNumber){
                                 waterNum = mp.getWaterContent();
                                 fertilizerNum = mp.getLeafCondition();
+                                if(returnNum(waterNum) == 1)
+                                    watchSoil.setImageResource(R.drawable.soil_watch1);
+                                else if(returnNum(waterNum) == 2)
+                                    watchSoil.setImageResource(R.drawable.soil_watch2);
+                                else if(returnNum(waterNum) == 3)
+                                    watchSoil.setImageResource(R.drawable.soil_watch3);
+
+                                if(returnNum(fertilizerNum) == 1)
+                                    watchLeaf.setImageResource(R.drawable.leaf1);
+                                else if(returnNum(fertilizerNum) == 2)
+                                    watchLeaf.setImageResource(R.drawable.leaf2);
+                                else if(returnNum(fertilizerNum) == 3)
+                                    watchLeaf.setImageResource(R.drawable.leaf3);
+
                                 Log.d(TAG, "waterNum: " + waterNum);
                                 Log.d(TAG, "fertilizerNum: " + fertilizerNum);
                                 int level = mp.getLevel();
@@ -360,6 +374,7 @@ public class FragmentOne extends Fragment {
             @Override
             public void onClick(View view) {
                 //数据库删除后刷新界面
+                onResume();
                 removeBoard.setVisibility(View.GONE);
             }
         });
@@ -375,7 +390,16 @@ public class FragmentOne extends Fragment {
         super.onResume();
         getData();
     }
-
+    int returnNum(int a){
+        if(a>0&&a<=30)
+            return 1;
+        else if (a>30&&a<=60)
+            return 2;
+        else if (a>60)
+            return 3;
+        else
+            return 0;
+    }
     void getData (){
         //通过修改imageview的src来加载不同植物状态显示的图片
         //计算myplant中的室内植物
@@ -432,7 +456,7 @@ public class FragmentOne extends Fragment {
                 @Override
                 public boolean onLongClick(View view) {
                     removeBoard.setVisibility(View.VISIBLE);
-                    return false;
+                    return true;
                 }
             });
 
@@ -449,5 +473,7 @@ public class FragmentOne extends Fragment {
 
         }
     }
+
+
 
 }
