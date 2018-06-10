@@ -410,7 +410,7 @@ public class FragmentOne extends Fragment {
 
         }
         else{
-            imageView.setImageResource(R.drawable.plus);
+            imageView.setImageResource(R.drawable.pot);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
