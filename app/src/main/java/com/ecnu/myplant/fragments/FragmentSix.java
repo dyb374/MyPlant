@@ -648,7 +648,7 @@ public class FragmentSix extends Fragment {
 
         }
         else{
-            imageView.setImageResource(R.drawable.plus);
+            imageView.setImageResource(R.drawable.outdoor_soil);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
