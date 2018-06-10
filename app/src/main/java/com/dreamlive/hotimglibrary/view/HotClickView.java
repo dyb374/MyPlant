@@ -135,6 +135,8 @@ public class HotClickView extends View {
         init();
     }
 
+
+
     public void setCanScale(boolean canScale) {
         isCanScale = canScale;
     }
@@ -142,6 +144,8 @@ public class HotClickView extends View {
     public void setCanMove(boolean canMove) {
         isCanMove = canMove;
     }
+
+    public void setCanClick(boolean canClick) {isCanClick = canClick;}
 
     protected void init() {
         mCheckAreas = new HashMap<String, HotArea.CheckArea>();

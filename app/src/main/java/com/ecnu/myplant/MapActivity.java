@@ -94,13 +94,14 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
         String place = hotArea.getAreaId();
         dialogLayout.setVisibility(View.VISIBLE);
         dialogText.setText("确认去" + hotArea.getAreaTitle() + "寻找植物?");
+        mHotView.setCanClick(false);
         dialogCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                mHotView.setCanClick(true);
                 dialogLayout.setVisibility(View.GONE);
             }
         });
-
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,6 +114,7 @@ public class MapActivity extends AppCompatActivity implements HotClickView.OnCli
                     @Override
                     public void onClick(View view) {
                         TranslateAnimation animation = ViewAnimation.hideAnimation("down");
+                        mHotView.setCanClick(true);
                         bottom.startAnimation(animation);
                         bottom.setVisibility(View.GONE);
                         //停止服务
