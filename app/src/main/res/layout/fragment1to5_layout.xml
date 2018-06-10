@@ -155,7 +155,6 @@
             android:layout_gravity="center|left"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/soil_watch"
             android:visibility="gone" />
 
 
@@ -166,7 +165,6 @@
             android:layout_gravity="center|right"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="30dp"
-            android:src="@drawable/leaf"
             android:visibility="gone" />
 
         <ImageView
@@ -211,5 +209,31 @@
             android:src="@drawable/cancel"
             android:visibility="gone" />
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/remove_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/remove_dialog"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/remove_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"/>
+
+        <ImageView
+            android:id="@+id/remove_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/cancel"/>
+
+    </FrameLayout>
+
 
 </FrameLayout>

@@ -80,6 +80,9 @@ public class FragmentEight extends Fragment {
     int soilmusic;
     SoundPool spraysp;
     int spraymusic;
+    FrameLayout removeBoard;
+    ImageView removeOk;
+    ImageView removeCancel;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -116,6 +119,9 @@ public class FragmentEight extends Fragment {
         soilmusic = soilsp.load(this.getActivity(),R.raw.soil,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
         spraysp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         spraymusic = spraysp.load(this.getActivity(),R.raw.spray,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+        removeBoard = (FrameLayout) view.findViewById(R.id.outdoor_remove_board);//移除植物面板
+        removeOk = (ImageView) view.findViewById(R.id.outdoor_remove_ok);//确认移除植物
+        removeCancel = (ImageView) view.findViewById(R.id.outdoor_remove_cancel); //取消移除植物
 
         outdoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
@@ -580,6 +586,20 @@ public class FragmentEight extends Fragment {
             }
         },100);
 
+        removeCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeBoard.setVisibility(View.GONE);
+            }
+        });
+
+        removeOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //数据库删除后刷新界面
+                removeBoard.setVisibility(View.GONE);
+            }
+        });
 
         getData();
         return view;
@@ -642,7 +662,13 @@ public class FragmentEight extends Fragment {
                     tools.setVisibility(View.VISIBLE);
                 }
             });
-
+            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    removeBoard.setVisibility(View.VISIBLE);
+                    return false;
+                }
+            });
         }
         else{
             imageView.setImageResource(R.drawable.outdoor_soil);
