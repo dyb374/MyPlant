@@ -91,7 +91,7 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
             List<Plant> plants = DataSupport.findAll(Plant.class);
             for (Plant p : plants) {
                 if (plantName.equals(p.getName()) && p.getId() >= 6 && p.getId() <= 8) {
-                    Seed seed = new Seed(plantName, R.drawable.ok);
+                    Seed seed = new Seed(plantName, R.drawable.tree_seed);
                     seedList.add(seed);
                 }
             }
