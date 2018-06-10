@@ -35,7 +35,7 @@ import java.util.List;
  */
 
 public class FragmentFive extends Fragment {
-    private int indoorFragmentNumber = 1;
+    private int indoorFragmentNumber = 5;
     int waterNum = 0;
     int fertilizerNum = 0;
     int waterFlag = 0;

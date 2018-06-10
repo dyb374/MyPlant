@@ -38,7 +38,7 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FragmentEight extends Fragment {
-    private int outdoorFragmentNumber = 1;
+    private int outdoorFragmentNumber = 3;
     int waterNum = 0;
     int fertilizerNum = 0;
     int soilNum = 0;
