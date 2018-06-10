@@ -25,7 +25,6 @@ public class LongTouchBtn extends ProgressBar {
      * 下拉刷新的回调接口
      */
     private LongTouchListener mListener;
-
     /**
      * 按钮长按时 间隔多少毫秒来处理 回调方法
      */

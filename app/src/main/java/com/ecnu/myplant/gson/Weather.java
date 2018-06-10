@@ -11,13 +11,13 @@ import java.util.Date;
 
 public class Weather {
 
-    public String temp;
-    public String wind_direction;
-    public String wind_strength;
-    public String humidity;
-    public String time;
-    public String uv_index;
-    public String drying_index;
+    public String temp;//温度
+    public String wind_direction;//风向
+    public String wind_strength;//风力
+    public String humidity;//湿度
+    public String time;//时间
+    public String uv_index;//紫外线
+    public String drying_index;//干燥度
 
     public Weather(String temp, String wind_direction, String wind_strength, String humidity, String time, String uv_index, String drying_index) {
         this.temp = temp;

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public BDAbstractLocationListener myListener = new MyLocationListener();
     public LocationClientOption option = new LocationClientOption();
     public static String city;
-    public static Weather weather;                                                 //每隔一天更新此实例
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         /*

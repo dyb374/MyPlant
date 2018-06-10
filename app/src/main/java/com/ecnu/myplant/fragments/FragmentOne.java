@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
@@ -18,6 +20,7 @@ import android.media.AudioManager;
 import android.content.Context;
 
 
+import com.bumptech.glide.util.LogTime;
 import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
 import com.ecnu.myplant.db.MyPlant;
@@ -59,6 +62,9 @@ public class FragmentOne extends Fragment {
     ImageView indoorWatch;
     SoundPool fertilizersp;
     int fertilizermusic;
+    SoundPool watersp;
+    int watermusic;
+    private static final String TAG = "FragmentOne";
 
     @Nullable
     @Override
@@ -82,6 +88,10 @@ public class FragmentOne extends Fragment {
         fertilizerProgress = (LongTouchBtn) view.findViewById(R.id.fertilizer_progress);//施肥进度条
         fertilizersp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         fertilizermusic = fertilizersp.load(this.getActivity(),R.raw.pesticide,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+        watersp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
+        watermusic = watersp.load(this.getActivity(),R.raw.water,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
+
+
 
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
@@ -90,6 +100,22 @@ public class FragmentOne extends Fragment {
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
                 watchOk.setVisibility(View.VISIBLE);
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
+                            count++;
+                            if (count == indoorFragmentNumber){
+                                waterNum = mp.getWaterContent();
+                                fertilizerNum = mp.getLeafCondition();
+                                Log.d(TAG, "waterNum: " + waterNum);
+                                Log.d(TAG, "fertilizerNum: " + fertilizerNum);
+                            }
+                        }
+                    }
+                }
             }
         });
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
@@ -138,16 +164,11 @@ public class FragmentOne extends Fragment {
                             count++;
                             if (count == indoorFragmentNumber){
                                 int newWaterNum = mp.getWaterContent() + waterNum / 3;
-                                if (newWaterNum >= 0 && newWaterNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setWaterContent(newWaterNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功浇水：" + waterNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "植物水量已满，无法浇水！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setWaterContent(newWaterNum > 100 ? 100 : newWaterNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功浇水！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -181,7 +202,7 @@ public class FragmentOne extends Fragment {
                 //数据库更新操作，获取fertilizerNum数据，之后fertilizerNum归零
                 int count = 0;
 
-                fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);//开启音频,(对音频文件播放的设置 例如左右声道等)
+
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
                 List<Plant> ps = DataSupport.findAll(Plant.class);
                 for(MyPlant mp : mps) {
@@ -190,16 +211,11 @@ public class FragmentOne extends Fragment {
                             count++;
                             if (count == indoorFragmentNumber){
                                 int newFertilizerNum = mp.getLeafCondition() + fertilizerNum / 3;
-                                if (newFertilizerNum >= 0 && newFertilizerNum <= 100){
-                                    int id = mp.getId();
-                                    MyPlant  mp2 = new MyPlant();
-                                    mp2.setLeafCondition(newFertilizerNum);
-                                    mp2.update(id);
-                                    Toast.makeText(getActivity(), "已成功施肥：" + fertilizerNum / 3 + "！", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
-                                    Toast.makeText(getActivity(), "土壤肥度已满，无法施肥！", Toast.LENGTH_SHORT).show();
-                                }
+                                int id = mp.getId();
+                                MyPlant  mp2 = new MyPlant();
+                                mp2.setLeafCondition(newFertilizerNum > 100 ? 100 : newFertilizerNum);
+                                mp2.update(id);
+                                Toast.makeText(getActivity(), "已成功施肥！", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -228,16 +244,28 @@ public class FragmentOne extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
+                watersp.stop(watermusic);
 
             }
         });
         waterProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int waterid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                waterid = watersp.play(watermusic, 1, 1, 0, 0, 1);
+
+                return false;
+
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    watersp.stop(waterid);
+                }
                 return false;
             }
+
         });
 
         waterProgress.setOnLongTouchListener(new LongTouchBtn.LongTouchListener() {//浇水进度条控件
@@ -269,14 +297,22 @@ public class FragmentOne extends Fragment {
             @Override
             public void onClick(View arg0) {
                 //Log.i("test", "自定义按钮处理单击");
-
+                fertilizersp.stop(fertilizermusic);
             }
         });
         fertilizerProgress.setOnLongClickListener(new View.OnLongClickListener() {
-
+            int fertizerid = 0;
             @Override
             public boolean onLongClick(View v) {
                 //Log.i("test", "自定义按钮处理长按一次相应");
+                fertizerid = fertilizersp.play(fertilizermusic, 1, 1, 0, 0, 1);
+                return false;
+            }
+
+            public boolean onTouch(View v, MotionEvent event) {
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    watersp.stop(fertizerid);
+                }
                 return false;
             }
         });

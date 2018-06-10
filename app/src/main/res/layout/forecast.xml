@@ -8,14 +8,20 @@
     android:background="@drawable/lick">
 
     <TextView
+        android:id="@+id/forecast_tile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
-        android:text="预报"
         android:textColor="#fff"
         android:textSize="20sp"/>
 
+    <TextView
+        android:id="@+id/forecast_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#fff"
+        android:textSize="25sp"/>
     <LinearLayout
         android:id="@+id/forecast_layout"
         android:orientation="vertical"
