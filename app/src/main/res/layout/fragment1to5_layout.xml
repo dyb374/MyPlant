@@ -137,7 +137,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:max="101"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:progressDrawable="@drawable/progresswater"/>
 
         <com.ecnu.myplant.LongTouchBtn
             android:id="@+id/fertilizer_progress"
@@ -146,7 +147,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:max="101"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:progressDrawable="@drawable/progressf"/>
 
         <ImageView
             android:id="@+id/watch_soil"
