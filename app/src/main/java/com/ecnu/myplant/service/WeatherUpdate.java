@@ -8,11 +8,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.os.SystemClock;
+import android.util.Log;
 
 import com.ecnu.myplant.MainActivity;
+import com.ecnu.myplant.db.MyPlant;
+import com.ecnu.myplant.db.Plant;
 import com.ecnu.myplant.gson.Weather;
 
+import org.litepal.crud.DataSupport;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by qyy on 2018/6/9.
@@ -38,6 +44,18 @@ public class WeatherUpdate extends Service {
                 CustomWeatherReport.getSimpleWeatherJSON();
                 weather = CustomWeatherReport.JSONToWeather();
                 //根据天气数据修改数据库
+                double temp = Double.parseDouble(weather.temp);
+                double humidity = Double.parseDouble(weather.humidity.substring(0,weather.humidity.indexOf("%")));
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                for(MyPlant mp : mps) {
+                    int id = mp.getId();
+                    MyPlant mp2 = new MyPlant();
+                    mp2.setWaterContent((int)((double)mp.getWaterContent() * (1 - temp / 100)));
+                    mp2.setLeafCondition((int)((double)mp.getLeafCondition() * (humidity / 100)));
+                    mp2.setPestsContent((int)((double)mp.getPestsContent() * (1 - temp / 100)));
+                    mp2.setSoilFertility((int)((double)mp.getSoilFertility() * (1 - temp / 500 - (100 - humidity) / 500)));
+                    mp2.update(id);
+                }
             }
         }).start();
         alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
