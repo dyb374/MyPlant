@@ -21,6 +21,7 @@ import android.content.Context;
 
 
 import com.bumptech.glide.util.LogTime;
+import com.ecnu.myplant.IndoorSceneActivity;
 import com.ecnu.myplant.R;
 import com.ecnu.myplant.SeedActivity;
 import com.ecnu.myplant.db.MyPlant;
@@ -31,6 +32,8 @@ import com.ecnu.myplant.LongTouchBtn;
 import org.litepal.crud.DataSupport;
 
 import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by Andrew Dong on 2018/4/19.
@@ -112,6 +115,8 @@ public class FragmentOne extends Fragment {
                                 fertilizerNum = mp.getLeafCondition();
                                 Log.d(TAG, "waterNum: " + waterNum);
                                 Log.d(TAG, "fertilizerNum: " + fertilizerNum);
+                                int level = mp.getLevel();
+                                Log.d(TAG, "level: " + level);
                             }
                         }
                     }
@@ -201,8 +206,6 @@ public class FragmentOne extends Fragment {
                 fertilizerProgress.setVisibility(View.GONE);
                 //数据库更新操作，获取fertilizerNum数据，之后fertilizerNum归零
                 int count = 0;
-
-
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
                 List<Plant> ps = DataSupport.findAll(Plant.class);
                 for(MyPlant mp : mps) {
@@ -357,6 +360,8 @@ public class FragmentOne extends Fragment {
         //通过修改imageview的src来加载不同植物状态显示的图片
         //计算myplant中的室内植物
         int count = 0;
+        int level = -1;
+        int waterContent = -1;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
         List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
@@ -366,13 +371,33 @@ public class FragmentOne extends Fragment {
                     if (count == indoorFragmentNumber){
                         has = true;
                         plantName = mp.getPlant();
+                        level = mp.getLevel() == 0 ? 0 : mp.getLevel();
+                        waterContent = mp.getWaterContent();
                         break;
                     }
                 }
             }
         }
         if(has){
-            imageView.setImageResource(R.drawable.flower_pot);
+            //根据level大小和水分设置植物图片
+            if (level == 0){
+                imageView.setImageResource(R.drawable.indoor_l1);
+            }
+            else if (level > 0 && level < 80 && waterContent < 10){
+                imageView.setImageResource(R.drawable.indoor_l2u);
+            }
+            else if (level > 0 && level < 80 && waterContent >= 10){
+                imageView.setImageResource(R.drawable.indoor_l2);
+            }
+            else if (level >= 80 && level < 112 && waterContent < 10){
+                imageView.setImageResource(R.drawable.indoor_l3u);
+            }
+            else if (level >= 80 && level < 112 && waterContent >= 10){
+                imageView.setImageResource(R.drawable.indoor_l3);
+            }
+            else if (level == 112){
+                imageView.setImageResource(R.drawable.indoor_l4);
+            }
             //为image设置点击事件
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
