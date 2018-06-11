@@ -12,20 +12,14 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="3"
             android:orientation="horizontal"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="0dp"
+            android:layout_weight="5"
             android:orientation="horizontal">
 
             <ImageView
@@ -34,12 +28,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|bottom"
                 android:layout_weight="1" />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -144,7 +137,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:max="101"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:progressDrawable="@drawable/progresswater"/>
 
         <com.ecnu.myplant.LongTouchBtn
             android:id="@+id/fertilizer_progress"
@@ -153,7 +147,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:max="101"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:progressDrawable="@drawable/progressf"/>
 
         <ImageView
             android:id="@+id/watch_soil"
@@ -162,7 +157,6 @@
             android:layout_gravity="center|left"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="30dp"
-            android:src="@drawable/soil_watch"
             android:visibility="gone" />
 
 
@@ -173,7 +167,6 @@
             android:layout_gravity="center|right"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="30dp"
-            android:src="@drawable/leaf"
             android:visibility="gone" />
 
         <ImageView
@@ -218,5 +211,31 @@
             android:src="@drawable/cancel"
             android:visibility="gone" />
     </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/remove_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/remove_dialog"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/remove_ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:src="@drawable/ok"/>
+
+        <ImageView
+            android:id="@+id/remove_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center"
+            android:layout_marginLeft="50dp"
+            android:src="@drawable/cancel"/>
+
+    </FrameLayout>
+
 
 </FrameLayout>

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public BDAbstractLocationListener myListener = new MyLocationListener();
     public LocationClientOption option = new LocationClientOption();
     public static String city;
+    MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent1 = new Intent(MainActivity.this, IndoorSceneActivity.class);
                 startActivity(intent1);
+            }
+        });
+        mp =MediaPlayer.create(this, R.raw.bgm);
+        mp.start();
+        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+
+            @Override
+            public void onCompletion(MediaPlayer arg0) {
+                mp.start();
+                mp.setLooping(true);
             }
         });
     }

@@ -49,7 +49,6 @@ public class FragmentSix extends Fragment {
     int pestFlag = 0;
     ImageView imageView = null;
     LinearLayout tools = null;
-    boolean has = false;
     String plantName = null;
     LongTouchBtn fertilizerProgress;
     LongTouchBtn waterProgress;
@@ -80,7 +79,9 @@ public class FragmentSix extends Fragment {
     int soilmusic;
     SoundPool spraysp;
     int spraymusic;
-
+    FrameLayout removeBoard;
+    ImageView removeOk;
+    ImageView removeCancel;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -117,8 +118,9 @@ public class FragmentSix extends Fragment {
         soilmusic = soilsp.load(this.getActivity(),R.raw.soil,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
         spraysp= new SoundPool(10, AudioManager.STREAM_SYSTEM, 5);//第一个参数为同时播放数据流的最大个数，第二数据流类型，第三为声音质量
         spraymusic = spraysp.load(this.getActivity(),R.raw.spray,1);//所要加载的music文件 ,(第2个参数即为资源文件，第3个为音乐的优先级), 其中raw是res文件夹里的 ,较低版本的android可能没有,需要手动创建,并在'R'文件中声明
-
-
+        removeBoard = (FrameLayout) view.findViewById(R.id.outdoor_remove_board);//移除植物面板
+        removeOk = (ImageView) view.findViewById(R.id.outdoor_remove_ok);//确认移除植物
+        removeCancel = (ImageView) view.findViewById(R.id.outdoor_remove_cancel); //取消移除植物
 
         outdoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
@@ -139,10 +141,27 @@ public class FragmentSix extends Fragment {
                                 fertilizerNum = mp.getLeafCondition();
                                 soilNum = mp.getSoilFertility();
                                 pestNum = mp.getPestsContent();
+
+                                if(returnNum(waterNum) == 1)
+                                    watchSoil.setImageResource(R.drawable.soil_watch1);
+                                else if(returnNum(waterNum) == 2)
+                                    watchSoil.setImageResource(R.drawable.soil_watch2);
+                                else if(returnNum(waterNum) == 3)
+                                    watchSoil.setImageResource(R.drawable.soil_watch3);
+
+                                if(returnNum(fertilizerNum) == 1)
+                                    watchLeaf.setImageResource(R.drawable.leaf1);
+                                else if(returnNum(fertilizerNum) == 2)
+                                    watchLeaf.setImageResource(R.drawable.leaf2);
+                                else if(returnNum(fertilizerNum) == 3)
+                                    watchLeaf.setImageResource(R.drawable.leaf3);
+
                                 Log.d(TAG, "waterNum: " + waterNum);
                                 Log.d(TAG, "fertilizerNum: " + fertilizerNum);
                                 Log.d(TAG, "soilNum: " + soilNum);
                                 Log.d(TAG, "pestNum: " + pestNum);
+                                int level = mp.getLevel();
+                                Log.d(TAG, "level: " + level);
                             }
                         }
                     }
@@ -580,6 +599,35 @@ public class FragmentSix extends Fragment {
 
             }
         },100);
+        removeCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                removeBoard.setVisibility(View.GONE);
+            }
+        });
+
+        removeOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //数据库删除后刷新界面
+                int count = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
+                for(MyPlant mp : mps) {
+                    for(Plant p : ps) {
+                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
+                            count++;
+                            if (count == outdoorFragmentNumber){
+                                int id = mp.getId();
+                                DataSupport.delete(MyPlant.class, id);
+                            }
+                        }
+                    }
+                }
+                getData();
+                removeBoard.setVisibility(View.GONE);
+            }
+        });
 
 
         getData();
@@ -596,6 +644,9 @@ public class FragmentSix extends Fragment {
         //通过修改imageview的src来加载不同植物状态显示的图片
         //计算myplant中的室内植物
         int count = 0;
+        int level = -1;
+        int waterContent = -1;
+        boolean has = false;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
         List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
@@ -605,13 +656,33 @@ public class FragmentSix extends Fragment {
                     if (count == outdoorFragmentNumber){
                         has = true;
                         plantName = mp.getPlant();
+                        level = mp.getLevel() == 0 ? 0 : mp.getLevel();
+                        waterContent = mp.getWaterContent();
                         break;
                     }
                 }
             }
         }
         if(has){
-            imageView.setImageResource(R.drawable.flower_pot);
+            //根据level大小和水分设置植物图片
+            if (level == 0){
+                imageView.setImageResource(R.drawable.outdoor_l1);
+            }
+            else if (level > 0 && level < 100 && waterContent < 10){
+                imageView.setImageResource(R.drawable.outdoor_l2u);
+            }
+            else if (level > 0 && level < 100 && waterContent >= 10){
+                imageView.setImageResource(R.drawable.outdoor_l2);
+            }
+            else if (level >= 100 && level < 150 && waterContent < 10){
+                imageView.setImageResource(R.drawable.outdoor_l3u);
+            }
+            else if (level >= 100 && level < 150 && waterContent >= 10){
+                imageView.setImageResource(R.drawable.outdoor_l3);
+            }
+            else if (level == 150){
+                imageView.setImageResource(R.drawable.outdoor_l4);
+            }
             //为image设置点击事件
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -621,10 +692,16 @@ public class FragmentSix extends Fragment {
                     tools.setVisibility(View.VISIBLE);
                 }
             });
-
+            imageView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    removeBoard.setVisibility(View.VISIBLE);
+                    return true;
+                }
+            });
         }
         else{
-            imageView.setImageResource(R.drawable.plus);
+            imageView.setImageResource(R.drawable.outdoor_soil);
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -635,5 +712,14 @@ public class FragmentSix extends Fragment {
 
         }
     }
-
+    int returnNum(int a){
+        if(a>0&&a<=30)
+            return 1;
+        else if (a>30&&a<=60)
+            return 2;
+        else if (a>60)
+            return 3;
+        else
+            return 0;
+    }
 }

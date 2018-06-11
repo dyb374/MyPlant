@@ -47,14 +47,32 @@ public class WeatherUpdate extends Service {
                 double temp = Double.parseDouble(weather.temp);
                 double humidity = Double.parseDouble(weather.humidity.substring(0,weather.humidity.indexOf("%")));
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                List<Plant> ps = DataSupport.findAll(Plant.class);
                 for(MyPlant mp : mps) {
-                    int id = mp.getId();
-                    MyPlant mp2 = new MyPlant();
-                    mp2.setWaterContent((int)((double)mp.getWaterContent() * (1 - temp / 100)));
-                    mp2.setLeafCondition((int)((double)mp.getLeafCondition() * (humidity / 100)));
-                    mp2.setPestsContent((int)((double)mp.getPestsContent() * (1 - temp / 100)));
-                    mp2.setSoilFertility((int)((double)mp.getSoilFertility() * (1 - temp / 500 - (100 - humidity) / 500)));
-                    mp2.update(id);
+                    for(Plant p : ps){
+                        int id = mp.getId();
+                        MyPlant mp2 = new MyPlant();
+                        int newWaterNum = (int)((double)mp.getWaterContent() * (1 - temp / 100));
+                        int newFertilizerNum = (int)((double)mp.getLeafCondition() * (humidity / 100));
+                        int newPestNum = (int)((double)mp.getPestsContent() * (1 - temp / 100));
+                        int newSoilNum = (int)((double)mp.getSoilFertility() * (1 - temp / 500 - (100 - humidity) / 500));
+                        int newLevel = (int)(((double)mp.getWaterContent() + (double)mp.getLeafCondition() + (double)mp.getPestsContent() + (double)mp.getSoilFertility()) / 400.0 * 150.0);
+                        if (newLevel > mp.getLevel()) {
+                            mp2.setLevel(newLevel);
+                        }
+                        if (p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
+                            mp2.setWaterContent(newWaterNum);
+                            mp2.setLeafCondition(newFertilizerNum);
+                            mp2.update(id);
+                        }
+                        else if (p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8) {
+                            mp2.setWaterContent(newWaterNum);
+                            mp2.setLeafCondition(newFertilizerNum);
+                            mp2.setPestsContent(newPestNum);
+                            mp2.setSoilFertility(newSoilNum);
+                            mp2.update(id);
+                        }
+                    }
                 }
             }
         }).start();
