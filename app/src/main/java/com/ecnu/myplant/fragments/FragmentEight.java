@@ -49,7 +49,6 @@ public class FragmentEight extends Fragment {
     int pestFlag = 0;
     ImageView imageView = null;
     LinearLayout tools = null;
-    boolean has = false;
     String plantName = null;
     LongTouchBtn fertilizerProgress;
     LongTouchBtn waterProgress;
@@ -611,7 +610,16 @@ public class FragmentEight extends Fragment {
             @Override
             public void onClick(View view) {
                 //数据库删除后刷新界面
-                onResume();
+                int id = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                for(MyPlant mp : mps){
+                    if(mp.getFragment() == outdoorFragmentNumber + 5){
+                        id = mp.getId();
+                        break;
+                    }
+                }
+                DataSupport.delete(MyPlant.class, id);
+                getData();
                 removeBoard.setVisibility(View.GONE);
 
             }
@@ -633,20 +641,15 @@ public class FragmentEight extends Fragment {
         int count = 0;
         int level = -1;
         int waterContent = -1;
+        boolean has = false;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-        List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
-            for(Plant p : ps) {
-                if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
-                    count++;
-                    if (count == outdoorFragmentNumber){
-                        has = true;
-                        plantName = mp.getPlant();
-                        level = mp.getLevel() == 0 ? 0 : mp.getLevel();
-                        waterContent = mp.getWaterContent();
-                        break;
-                    }
-                }
+            if(mp.getFragment() == outdoorFragmentNumber + 5) {
+                has = true;
+                plantName = mp.getPlant();
+                level = mp.getLevel() == 0 ? 0 : mp.getLevel();
+                waterContent = mp.getWaterContent();
+                break;
             }
         }
         if(has){
@@ -692,6 +695,7 @@ public class FragmentEight extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), OutdoorsSeedActivity.class);
+                    intent1.putExtra("fragment", outdoorFragmentNumber + 5);
                     startActivity(intent1);
                 }
             });

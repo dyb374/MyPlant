@@ -57,6 +57,7 @@ public class OutdoorsSeedActivity extends AppCompatActivity {
                 mp.setSoilFertility(50);
                 mp.setLeafCondition(50);
                 mp.setPestsContent(50);
+                mp.setFragment(getIntent().getIntExtra("fragment", 0));
                 mp.save();
                 Toast.makeText(OutdoorsSeedActivity.this, "成功领养植物："+ seed.getName() +"！", Toast.LENGTH_SHORT).show();
                 List<ProvincePlant> pps = DataSupport.findAll(ProvincePlant.class);
