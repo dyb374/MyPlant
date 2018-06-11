@@ -126,6 +126,7 @@ public class FragmentEight extends Fragment {
         outdoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
@@ -171,6 +172,7 @@ public class FragmentEight extends Fragment {
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 fertilizerOk.setVisibility(View.VISIBLE);
                 fertilizerCancel.setVisibility(View.VISIBLE);
@@ -180,6 +182,7 @@ public class FragmentEight extends Fragment {
         water.setOnClickListener(new View.OnClickListener() {//浇水按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 waterOk.setVisibility(View.VISIBLE);
                 waterCancel.setVisibility(View.VISIBLE);
@@ -189,6 +192,7 @@ public class FragmentEight extends Fragment {
         soil.setOnClickListener(new View.OnClickListener() {//松土按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 soilOk.setVisibility(View.VISIBLE);
                 soilCancel.setVisibility(View.VISIBLE);
@@ -198,6 +202,7 @@ public class FragmentEight extends Fragment {
         pest.setOnClickListener(new View.OnClickListener() {//除虫按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 pestOk.setVisibility(View.VISIBLE);
                 peatCancel.setVisibility(View.VISIBLE);
@@ -208,6 +213,7 @@ public class FragmentEight extends Fragment {
         watchOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 watchOk.setVisibility(View.GONE);
                 watchLeaf.setVisibility(View.GONE);
@@ -218,6 +224,7 @@ public class FragmentEight extends Fragment {
         waterOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 waterCancel.setVisibility(View.GONE);
                 waterOk.setVisibility(View.GONE);
@@ -250,6 +257,7 @@ public class FragmentEight extends Fragment {
         waterCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 waterCancel.setVisibility(View.GONE);
                 waterOk.setVisibility(View.GONE);
@@ -263,6 +271,7 @@ public class FragmentEight extends Fragment {
         soilOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 soilCancel.setVisibility(View.GONE);
                 soilOk.setVisibility(View.GONE);
@@ -295,6 +304,7 @@ public class FragmentEight extends Fragment {
         soilCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 soilCancel.setVisibility(View.GONE);
                 soilOk.setVisibility(View.GONE);
@@ -308,6 +318,7 @@ public class FragmentEight extends Fragment {
         fertilizerOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 fertilizerCancel.setVisibility(View.GONE);
                 fertilizerOk.setVisibility(View.GONE);
@@ -340,6 +351,7 @@ public class FragmentEight extends Fragment {
         fertilizerCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 fertilizerCancel.setVisibility(View.GONE);
                 fertilizerOk.setVisibility(View.GONE);
@@ -353,6 +365,7 @@ public class FragmentEight extends Fragment {
         pestOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 peatCancel.setVisibility(View.GONE);
                 pestOk.setVisibility(View.GONE);
@@ -385,6 +398,7 @@ public class FragmentEight extends Fragment {
         peatCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 peatCancel.setVisibility(View.GONE);
                 pestOk.setVisibility(View.GONE);
@@ -399,6 +413,7 @@ public class FragmentEight extends Fragment {
 
             @Override
             public void onClick(View arg0) {
+                enabledAll(true);
                 //Log.i("test", "自定义按钮处理单击");
                 //watersp.stop(watermusic);
 
@@ -707,6 +722,16 @@ public class FragmentEight extends Fragment {
             return 3;
         else
             return 0;
+    }
+
+
+    public void enabledAll(Boolean value) {
+        imageView.setEnabled(value);
+        water.setEnabled(value);
+        soil.setEnabled(value);
+        fertilizer.setEnabled(value);
+        pest.setEnabled(value);
+        outdoorWatch.setEnabled(value);
     }
 
 }

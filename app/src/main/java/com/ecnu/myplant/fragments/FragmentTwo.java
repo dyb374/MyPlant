@@ -96,6 +96,7 @@ public class FragmentTwo extends Fragment {
         indoorWatch.setOnClickListener(new View.OnClickListener() {//观察按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 watchLeaf.setVisibility(View.VISIBLE);
                 watchSoil.setVisibility(View.VISIBLE);
@@ -134,6 +135,7 @@ public class FragmentTwo extends Fragment {
         fertilizer.setOnClickListener(new View.OnClickListener() {//施肥按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 fertilizerCancel.setVisibility(View.VISIBLE);
                 fertilizerOk.setVisibility(View.VISIBLE);
@@ -143,6 +145,7 @@ public class FragmentTwo extends Fragment {
         water.setOnClickListener(new View.OnClickListener() {//浇水按钮监听器
             @Override
             public void onClick(View view) {
+                enabledAll(false);
                 board.setVisibility(View.VISIBLE);
                 waterCancel.setVisibility(View.VISIBLE);
                 waterOk.setVisibility(View.VISIBLE);
@@ -153,6 +156,7 @@ public class FragmentTwo extends Fragment {
         watchOk.setOnClickListener(new View.OnClickListener() {//观察面板确认键
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 watchOk.setVisibility(View.GONE);
                 watchLeaf.setVisibility(View.GONE);
@@ -163,6 +167,7 @@ public class FragmentTwo extends Fragment {
         waterOk.setOnClickListener(new View.OnClickListener() {//浇水面板确认键
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 waterCancel.setVisibility(View.GONE);
                 waterOk.setVisibility(View.GONE);
@@ -195,6 +200,7 @@ public class FragmentTwo extends Fragment {
         waterCancel.setOnClickListener(new View.OnClickListener() {//浇水面板取消键
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 waterCancel.setVisibility(View.GONE);
                 waterOk.setVisibility(View.GONE);
@@ -208,6 +214,7 @@ public class FragmentTwo extends Fragment {
         fertilizerOk.setOnClickListener(new View.OnClickListener() {//施肥面板确认键
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 fertilizerCancel.setVisibility(View.GONE);
                 fertilizerOk.setVisibility(View.GONE);
@@ -240,6 +247,7 @@ public class FragmentTwo extends Fragment {
         fertilizerCancel.setOnClickListener(new View.OnClickListener() {//施肥面板取消键
             @Override
             public void onClick(View view) {
+                enabledAll(true);
                 board.setVisibility(View.GONE);
                 fertilizerCancel.setVisibility(View.GONE);
                 fertilizerOk.setVisibility(View.GONE);
@@ -462,6 +470,12 @@ public class FragmentTwo extends Fragment {
             return 3;
         else
             return 0;
+    }
+
+    public void enabledAll(Boolean value) {
+        imageView.setEnabled(value);
+        water.setEnabled(value);
+        indoorWatch.setEnabled(value);
     }
 
 }
