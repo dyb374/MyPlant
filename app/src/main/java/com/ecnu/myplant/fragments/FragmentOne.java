@@ -381,20 +381,15 @@ public class FragmentOne extends Fragment {
             @Override
             public void onClick(View view) {
                 //数据库删除后刷新界面
-                int count = 0;
+                int id = 0;
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-                List<Plant> ps = DataSupport.findAll(Plant.class);
-                for(MyPlant mp : mps) {
-                    for(Plant p : ps) {
-                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
-                            count++;
-                            if (count == indoorFragmentNumber){
-                                int id = mp.getId();
-                                DataSupport.delete(MyPlant.class, id);
-                            }
-                        }
+                for(MyPlant mp : mps){
+                    if(mp.getFragment() == indoorFragmentNumber){
+                        id = mp.getId();
+                        break;
                     }
                 }
+                DataSupport.delete(MyPlant.class, id);
                 getData();
                 removeBoard.setVisibility(View.GONE);
             }
@@ -429,19 +424,13 @@ public class FragmentOne extends Fragment {
         int waterContent = -1;
         boolean has = false;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-        List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
-            for(Plant p : ps) {
-                if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
-                    count++;
-                    if (count == indoorFragmentNumber){
-                        has = true;
-                        plantName = mp.getPlant();
-                        level = mp.getLevel() == 0 ? 0 : mp.getLevel();
-                        waterContent = mp.getWaterContent();
-                        break;
-                    }
-                }
+            if(mp.getFragment() == indoorFragmentNumber) {
+                has = true;
+                plantName = mp.getPlant();
+                level = mp.getLevel() == 0 ? 0 : mp.getLevel();
+                waterContent = mp.getWaterContent();
+                break;
             }
         }
         if(has){
@@ -489,6 +478,7 @@ public class FragmentOne extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), SeedActivity.class);
+                    intent1.putExtra("fragment", indoorFragmentNumber);
                     startActivity(intent1);
                 }
             });

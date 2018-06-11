@@ -624,20 +624,15 @@ public class FragmentSix extends Fragment {
             @Override
             public void onClick(View view) {
                 //数据库删除后刷新界面
-                int count = 0;
+                int id = 0;
                 List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-                List<Plant> ps = DataSupport.findAll(Plant.class);
-                for(MyPlant mp : mps) {
-                    for(Plant p : ps) {
-                        if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
-                            count++;
-                            if (count == outdoorFragmentNumber){
-                                int id = mp.getId();
-                                DataSupport.delete(MyPlant.class, id);
-                            }
-                        }
+                for(MyPlant mp : mps){
+                    if(mp.getFragment() == outdoorFragmentNumber + 5){
+                        id = mp.getId();
+                        break;
                     }
                 }
+                DataSupport.delete(MyPlant.class, id);
                 getData();
                 removeBoard.setVisibility(View.GONE);
             }
@@ -662,19 +657,13 @@ public class FragmentSix extends Fragment {
         int waterContent = -1;
         boolean has = false;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-        List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
-            for(Plant p : ps) {
-                if(p.getName().equals(mp.getPlant()) && p.getId() >= 6 && p.getId() <= 8){
-                    count++;
-                    if (count == outdoorFragmentNumber){
-                        has = true;
-                        plantName = mp.getPlant();
-                        level = mp.getLevel() == 0 ? 0 : mp.getLevel();
-                        waterContent = mp.getWaterContent();
-                        break;
-                    }
-                }
+            if(mp.getFragment() == outdoorFragmentNumber + 5) {
+                has = true;
+                plantName = mp.getPlant();
+                level = mp.getLevel() == 0 ? 0 : mp.getLevel();
+                waterContent = mp.getWaterContent();
+                break;
             }
         }
         if(has){
@@ -720,6 +709,7 @@ public class FragmentSix extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), OutdoorsSeedActivity.class);
+                    intent1.putExtra("fragment", outdoorFragmentNumber + 5);
                     startActivity(intent1);
                 }
             });

@@ -73,6 +73,14 @@ public class MyPlant extends DataSupport{
         this.pestsContent = pestsContent;
     }
 
+    public int getFragment() {
+        return fragment;
+    }
+
+    public void setFragment(int fragment) {
+        this.fragment = fragment;
+    }
+
     private int id;
     private String plant;
     private int stateOfLife;//生命状态0-死亡，1-健康，2-不健康
@@ -81,4 +89,5 @@ public class MyPlant extends DataSupport{
     private int soilFertility;//0-100
     private int leafCondition;//0-100
     private int pestsContent;//0-100
+    private int fragment;
 }

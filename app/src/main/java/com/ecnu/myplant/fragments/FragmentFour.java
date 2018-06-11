@@ -42,7 +42,6 @@ public class FragmentFour extends Fragment {
     int fertilizerFlag = 0;
     ImageView imageView = null;
     LinearLayout tools = null;
-    boolean has = false;
     String plantName = null;
     ImageView watchSoil;
     ImageView fertilizer;
@@ -369,7 +368,16 @@ public class FragmentFour extends Fragment {
             @Override
             public void onClick(View view) {
                 //数据库删除后刷新界面
-                onResume();
+                int id = 0;
+                List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
+                for(MyPlant mp : mps){
+                    if(mp.getFragment() == indoorFragmentNumber){
+                        id = mp.getId();
+                        break;
+                    }
+                }
+                DataSupport.delete(MyPlant.class, id);
+                getData();
                 removeBoard.setVisibility(View.GONE);
             }
         });
@@ -392,20 +400,15 @@ public class FragmentFour extends Fragment {
         int count = 0;
         int level = -1;
         int waterContent = -1;
+        boolean has = false;
         List<MyPlant> mps = DataSupport.findAll(MyPlant.class);
-        List<Plant> ps = DataSupport.findAll(Plant.class);
         for(MyPlant mp : mps) {
-            for(Plant p : ps) {
-                if(p.getName().equals(mp.getPlant()) && p.getId() >= 1 && p.getId() <= 5){
-                    count++;
-                    if (count == indoorFragmentNumber){
-                        has = true;
-                        plantName = mp.getPlant();
-                        level = mp.getLevel() == 0 ? 0 : mp.getLevel();
-                        waterContent = mp.getWaterContent();
-                        break;
-                    }
-                }
+            if(mp.getFragment() == indoorFragmentNumber) {
+                has = true;
+                plantName = mp.getPlant();
+                level = mp.getLevel() == 0 ? 0 : mp.getLevel();
+                waterContent = mp.getWaterContent();
+                break;
             }
         }
         if(has){
@@ -451,6 +454,7 @@ public class FragmentFour extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent1 = new Intent(getActivity(), SeedActivity.class);
+                    intent1.putExtra("fragment", indoorFragmentNumber);
                     startActivity(intent1);
                 }
             });
