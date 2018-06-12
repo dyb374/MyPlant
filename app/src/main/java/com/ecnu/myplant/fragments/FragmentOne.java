@@ -436,18 +436,18 @@ public class FragmentOne extends Fragment {
         if(has){
             //根据level大小和水分设置植物图片
             if (level == 0){
-                imageView.setImageResource(R.drawable.indoor_l1);
-            }
-            else if (level > 0 && level < 80 && waterContent < 10){
-                imageView.setImageResource(R.drawable.indoor_l2u);
-            }
-            else if (level > 0 && level < 80 && waterContent >= 10){
-                imageView.setImageResource(R.drawable.indoor_l2);
-            }
-            else if (level >= 80 && level < 112 && waterContent < 10){
                 imageView.setImageResource(R.drawable.indoor_l3u);
             }
-            else if (level >= 80 && level < 112 && waterContent >= 10){
+            else if (level > 0 && level < 76 && waterContent < 10){
+                imageView.setImageResource(R.drawable.indoor_l2u);
+            }
+            else if (level > 0 && level < 76 && waterContent >= 10){
+                imageView.setImageResource(R.drawable.indoor_l2);
+            }
+            else if (level >= 76 && level < 112 && waterContent < 10){
+                imageView.setImageResource(R.drawable.indoor_l3u);
+            }
+            else if (level >= 76 && level < 112 && waterContent >= 10){
                 imageView.setImageResource(R.drawable.indoor_l3);
             }
             else if (level == 112){
