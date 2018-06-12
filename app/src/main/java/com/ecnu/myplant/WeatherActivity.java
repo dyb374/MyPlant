@@ -110,9 +110,9 @@ public class WeatherActivity extends AppCompatActivity {
         airquility.setTypeface(typeface);
         airquility.setText("空气质量");
         aqititle.setTypeface(typeface);
-        aqititle.setText("aqi指数");
+        aqititle.setText("");
         pm25title.setTypeface(typeface);
-        pm25title.setText("pm2.5指数");
+        pm25title.setText("");
         aqiText.setTypeface(typeface);
         aqiText.setText("37   优");
         pm25Text.setTypeface(typeface);
